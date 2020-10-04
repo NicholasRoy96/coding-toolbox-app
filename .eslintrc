@@ -1,0 +1,27 @@
+{
+    "extends": [
+        "plugin:vue/essential",
+        "eslint:recommended"
+    ],
+    "rules": {
+        "quotes": [
+            2,
+            "single",
+            "avoid-escape"
+        ],
+        "indent": [
+            "error",
+            2
+        ],
+        "import/prefer-default-export": "off",
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "semi": "off"
+    },
+    "env": {
+        "node": true,
+        "browser": true
+    }
+}

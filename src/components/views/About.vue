@@ -1,0 +1,110 @@
+<template>
+<div class="about">
+    <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
+      <v-row class="mt-8" align="start" justify="center">
+        <v-card flat tile color="transparent">
+          <h1>What is The Coding Toolbox?</h1>
+          <v-col cols="6" offset="3">
+            <h2 class="font-weight-light text-center">If you have any questions, check out the FAQs before getting in touch</h2>
+          </v-col>
+        </v-card>
+      </v-row>
+    </v-parallax>
+    <v-row justify="center">
+      <v-col cols="5">
+        <v-card flat tile>
+          <v-img src="@/assets/laptop.jpg"  max-height="300"/>
+          <v-card-title class="text-left">Tried and tested tools</v-card-title>
+          <v-card-text class="text-left">Organised tools for all tech needs. From IDEs to Project Management, find everything you need right here</v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="4">
+        <v-card flat tile>
+          <v-img src="@/assets/review.jpg"  max-height="300"/>
+          <v-card-title class="text-left">Reviews and Tutorials</v-card-title>
+          <v-card-text class="text-left">Get real life feedback on the tools being used. Make use of the blogs and tutorials helping you </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row class="mt-4 mb-4" justify="center">
+      <v-col cols="9">
+        <v-divider />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col cols="10" offset="1">
+        <h2 class="text-left">Why The Coding Toolbox?</h2>
+      </v-col>
+      <v-col cols="3">
+        <v-card flat>
+          <v-card-image />
+          <v-card-title class="text-left">Everything you need in one place</v-card-title>
+          <v-card-text class="text-left">Theres so much info out there, from blog posts to websites. Access and compare all the tools you need in one place</v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="3">
+        <v-card flat>
+          <v-card-image />
+          <v-card-title class="text-left">Independent Reviews</v-card-title>
+          <v-card-text class="text-left">We do not sponsor tools, nor do we have favourites. Everything you read about these tools is completely subjective, leaving it up to you to decide what meets your requirements</v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="3">
+        <v-card flat>
+          <v-card-image />
+          <v-card-title class="text-left">Community Supported</v-card-title>
+          <v-card-text class="text-left">We rely on community support and content to ensure we find the best tools for every occasion. If you would like to get involved, head over to the contact page and get in touch!</v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row class="mt-4 mb-4" justify="center">
+      <v-col cols="9">
+        <v-divider />
+      </v-col>
+    </v-row>
+    <v-row justify="center" class="mb-4">
+      <v-col cols="4">
+        <h2 class="text-left">FAQs</h2>
+      </v-col>
+      <v-col cols="5">
+        <v-expansion-panels accordion flat tile multiple>
+          <v-expansion-panel v-for="(faq, index) in faqs" :key="index">
+            <v-expansion-panel-header class="mt-2 mb-2">
+              <strong>{{ faq.title }}</strong>
+              <template v-slot:actions>
+               <v-icon color="primary">
+                 $expand
+               </v-icon>
+             </template>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content class="text-left">
+              {{ faq.content }}
+            </v-expansion-panel-content>
+            <v-divider />
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-col>
+    </v-row>
+</div>
+</template>
+
+<script>
+export default {
+  name: 'About',
+  data() {
+    return {
+      faqs: [{
+        title: 'How can I help?',
+        content: 'You can help by giving us feedback on the tools we highlight. You can also help by getting in touch to add support for other programming languages.'
+      }, {
+        title: 'Will there be support for <insert language here>',
+        content: 'We are always looking to build on the tools and languages we show. However, we need your help, so if you are in the industry and can contribute, please get in touch!'
+      }, {
+        title: "You're missing an amazing tool",
+        content: 'There is a chance we have a missed a tool that you think people need to be aware of. If this is the case, please get in touch and we will look to get it added to the site.'
+      }]
+    }
+  }
+}
+
+</script>
