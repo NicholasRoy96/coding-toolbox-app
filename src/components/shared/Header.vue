@@ -1,6 +1,6 @@
 <template>
   <v-toolbar tile flat max-height="60">
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click="toggleSidebar(!sidebar.mini)"></v-app-bar-nav-icon>
     <v-toolbar-title @click="$router.push('/')">The Coding Toolbox</v-toolbar-title>
     <v-spacer />
     <v-btn text depressed v-for="(link, index) in links" @click="$router.push(link.route)" :key="index">
@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
   name: 'Header',
   data() {
@@ -35,6 +37,12 @@ export default {
         route: '/contact'
       }]
     }
+  },
+  computed: {
+    ...mapState([ 'sidebar' ])
+  },
+  methods: {
+    ...mapActions([ 'toggleSidebar' ])
   }
 }
 </script>

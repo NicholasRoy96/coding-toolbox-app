@@ -2,7 +2,12 @@
   <div id="app">
     <v-app>
       <Header />
-      <router-view />
+      <v-row>
+        <Sidebar />
+        <v-col cols="10">
+          <router-view />
+        </v-col>
+      </v-row>
       <Footer />
     </v-app>
   </div>
@@ -11,12 +16,14 @@
 <script>
 import Header from '@/components/shared/Header.vue'
 import Footer from '@/components/shared/Footer.vue'
+import Sidebar from '@/components/shared/Sidebar.vue'
 
 export default {
   name: 'Home',
   components: {
     Header,
-    Footer
+    Footer,
+    Sidebar
   }
 }
 
