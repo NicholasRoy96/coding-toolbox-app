@@ -1,20 +1,18 @@
 <template>
-  <v-toolbar tile flat max-height="60">
-    <v-app-bar-nav-icon @click="toggleSidebar(!sidebar.mini)"></v-app-bar-nav-icon>
-    <v-toolbar-title @click="$router.push('/')">The Coding Toolbox</v-toolbar-title>
+  <v-toolbar tile flat min-height="120" max-height="120">
+    <v-img src="../../assets/logo.png" class="logo" @click="$router.push('/')" />
     <v-spacer />
-    <v-btn text depressed v-for="(link, index) in links" @click="$router.push(link.route)" :key="index">
+    <v-btn class="link" large text depressed v-for="(link, index) in links" @click="$router.push(link.route)" :key="index">
       {{ link.text }}
     </v-btn>
     <v-spacer />
-    <v-icon @click="$vuetify.theme.dark = !$vuetify.theme.dark">
+    <v-icon class="themeToggle" @click="$vuetify.theme.dark = !$vuetify.theme.dark">
       mdi-brightness-4
     </v-icon>
   </v-toolbar>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Header',
@@ -27,22 +25,30 @@ export default {
         text: 'About',
         route: '/about'
       },{
-        text: 'Categories',
-        route: '/categories'
-      },{
-        text: 'Languages',
-        route: '/languages'
+        text: 'Blog',
+        route: '/blog'
       },{
         text: 'Contact',
         route: '/contact'
       }]
     }
-  },
-  computed: {
-    ...mapState([ 'sidebar' ])
-  },
-  methods: {
-    ...mapActions([ 'toggleSidebar' ])
   }
 }
 </script>
+
+<style scoped lang="scss">
+.logo {
+  cursor: pointer;
+  max-width: 110px;
+  max-height: 110px;
+  margin-left: 32px;
+  margin-top: 50px;
+}
+.link {
+  font-size: 24px !important;
+  margin-top: 50px;
+}
+.themeToggle {
+  margin-top: 50px;
+}
+</style>

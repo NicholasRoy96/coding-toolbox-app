@@ -3,8 +3,7 @@
     <v-app>
       <Header />
       <v-row>
-        <Sidebar />
-        <v-col cols="10">
+        <v-col cols="12">
           <router-view />
         </v-col>
       </v-row>
@@ -16,22 +15,21 @@
 <script>
 import Header from '@/components/shared/Header.vue'
 import Footer from '@/components/shared/Footer.vue'
-import Sidebar from '@/components/shared/Sidebar.vue'
 
 export default {
   name: 'Home',
   components: {
     Header,
-    Footer,
-    Sidebar
+    Footer
   }
 }
 
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Oxygen', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

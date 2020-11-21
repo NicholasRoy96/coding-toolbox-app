@@ -14,6 +14,10 @@ import ManageCategory from '../components/views/admin/categories/ManageCategory.
 import ManageLanguages from '../components/views/admin/languages/ManageLanguages.vue'
 import ManageLanguage from '../components/views/admin/languages/ManageLanguage.vue'
 
+// Blog Specific
+import Blog from '../components/views/Blog.vue'
+import Post from '../components/views/blog/Post.vue'
+
 // Category Specific
 import Categories from '../components/views/Categories.vue'
 import CategoryTools from '../components/views/categories/Tools.vue'
@@ -49,6 +53,16 @@ const routes = [{
   name: 'Privacy',
   path: '/privacy',
   component: Home
+},
+{
+  name: 'Blog',
+  path: '/blog',
+  component: Blog
+},
+{
+  name: 'Blog Post',
+  path: '/blog/:id',
+  component: Post
 },
 {
   name: 'Admin',

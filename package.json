@@ -8,10 +8,14 @@
     "dev": "vue-cli-service serve"
   },
   "dependencies": {
+    "@prismicio/vue": "^2.0.7",
     "app-root-path": "^3.0.0",
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
     "localstorage-ttl": "^1.0.2",
+    "moment": "^2.29.1",
+    "prismic-dom": "^2.2.4",
+    "prismic-javascript": "^3.0.2",
     "vue": "^2.6.12",
     "vue-router": "^3.2.0",
     "vuelidate": "^0.7.5",
