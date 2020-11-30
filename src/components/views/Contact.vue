@@ -51,7 +51,7 @@
               Thanks for getting in touch. We aim to reply within 24 hours.
             </v-card-title>
             <v-card-title>Whilst you're waiting to hear back, have a look around!</v-card-title>
-            <v-btn outlined @click="$router.push('/')">View some tools </v-btn>
+            <v-btn text @click="$router.push('/')">Check out some tools</v-btn>
           </v-card>
         </v-col>
         <v-col cols="1" class="ml-2">
@@ -74,6 +74,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
+import emailjs from 'emailjs-com'
 
 export default {
   name: 'Home',
@@ -132,11 +133,7 @@ export default {
         if (!this.$v.$invalid) {
           const { name, email, message } = this
           this.sending = true
-          await this.$http.post('/contact/email', {
-            name,
-            email,
-            message
-          })
+          await emailjs.send('service_wcms0qi', 'template_i20qj54', { name, email, message }, 'user_m6WjVnJPCl6pm2CrcUWsW')
           this.sent = true
           this.clear()
         }

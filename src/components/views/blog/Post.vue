@@ -66,7 +66,6 @@ export default {
       this.loading = true
       this.$prismic.client.getByUID('blog_post', this.blogID, { fetchLinks: 'author.name' }).then((document) => {
         if (document && document.data) {
-          console.log(document)
           this.post = document.data
         }
         this.loading = false
