@@ -133,7 +133,7 @@ export default {
         if (!this.$v.$invalid) {
           const { name, email, message } = this
           this.sending = true
-          await emailjs.send('service_wcms0qi', 'template_i20qj54', { name, email, message }, 'user_m6WjVnJPCl6pm2CrcUWsW')
+          await emailjs.send(process.env.VUE_APP_EMAIL_SERVICE, process.env.VUE_APP_EMAIL_TEMPLATE, { name, email, message }, process.env.VUE_APP_EMAIL_USER)
           this.sent = true
           this.clear()
         }
