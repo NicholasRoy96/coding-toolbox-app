@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Read the latest posts</h2>
+    <h2 color="primary">Read the latest posts</h2>
     <v-row justify="center">
       <v-col cols="3" v-for="(post, index) in posts" :key="index">
         <div class="post" @click='$router.push({ name: "Blog Post", params: { id: post.uid } })'>

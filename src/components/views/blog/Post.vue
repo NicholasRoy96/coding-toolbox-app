@@ -3,7 +3,7 @@
     <img :src="image.url" class="post__image" />
     <div class="post__content">
       <div class="post__heading">
-        <h1 class="post__heading__title">{{ title }}</h1>
+        <h1 class="post__heading__title" color="primary">{{ title }}</h1>
         <h4 class="post__heading__subtitle">By {{ author }} | {{ date | formatDate }}</h4>
       </div>
       <div v-for="(paragraph, index) in content" :key="index" class="post__text">
@@ -95,7 +95,6 @@ export default {
       padding-bottom: 40px;
       letter-spacing: -0.5px;
       &__title {
-        color: black;
         font-weight: 500;
         padding-bottom: 16px;
         font-size: 48px;
