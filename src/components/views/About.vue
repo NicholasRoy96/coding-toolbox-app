@@ -3,7 +3,7 @@
     <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
       <v-row class="mt-8" align="start" justify="center">
         <v-card flat tile color="transparent">
-          <h1>What is The Coding Toolbox?</h1>
+          <h1 class="secondary--text">What is The Coding Toolbox?</h1>
           <v-col cols="6" offset="3">
             <h2 class="font-weight-light text-center">If you have any questions, check out the FAQs before getting in touch</h2>
           </v-col>
@@ -37,21 +37,21 @@
       </v-col>
       <v-col cols="3">
         <v-card flat>
-          <v-card-image />
+          <v-img src="@/assets/tools.jpg"/>
           <v-card-title class="text-left">Everything you need in one place</v-card-title>
           <v-card-text class="text-left">Theres so much info out there, from blog posts to websites. Access and compare all the tools you need in one place</v-card-text>
         </v-card>
       </v-col>
       <v-col cols="3">
         <v-card flat>
-          <v-card-image />
+          <v-img src="@/assets/reviews.jpg"/>
           <v-card-title class="text-left">Independent Reviews</v-card-title>
           <v-card-text class="text-left">We do not sponsor tools, nor do we have favourites. Everything you read about these tools is completely subjective, leaving it up to you to decide what meets your requirements</v-card-text>
         </v-card>
       </v-col>
       <v-col cols="3">
         <v-card flat>
-          <v-card-image />
+          <v-img src="@/assets/community.jpg"/>
           <v-card-title class="text-left">Community Supported</v-card-title>
           <v-card-text class="text-left">We rely on community support and content to ensure we find the best tools for every occasion. If you would like to get involved, head over to the contact page and get in touch!</v-card-text>
         </v-card>

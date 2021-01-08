@@ -15,21 +15,21 @@ export default new Vuetify( {
   dark: false,
   themes: {
     light: {
-      primary: colors.red.darken3,
-      accent: colors.grey.lighten4,
-      secondary: colors.amber.lighten2,
-      info: colors.teal.lighten1,
+      primary: '#3f51b5',
+      secondary: '#b0bec5',
+      accent: '#8c9eff',
+      error: '#b71c1c',
+      info: '#3f51c2',
       warning: colors.amber.base,
-      error: colors.deepOrange.accent4,
       success: colors.green.accent3
     },
     dark: {
-      primary: colors.red.darken2,
-      accent: colors.grey.darken3,
-      secondary: colors.amber.darken3,
-      info: colors.teal.lighten1,
+      primary: '#3f51b5',
+      secondary: '#b0bec5',
+      accent: '#',
+      error: '#b71c1c',
+      info: '#3f51c2',
       warning: colors.amber.base,
-      error: colors.deepOrange.accent4,
       success: colors.green.accent3
     }
   }

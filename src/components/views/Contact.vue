@@ -58,7 +58,7 @@
           <v-divider vertical></v-divider>
         </v-col>
         <v-col cols="2">
-          <h2 class="text-left">Help us out</h2>
+          <h2 class="text-left">Get Involved</h2>
           <p class="text-left mt-4">
             We are always looking to add new content and we need your help
           </p>

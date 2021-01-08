@@ -3,7 +3,7 @@
     <v-app>
       <Header />
       <v-row>
-        <v-col cols="12">
+        <v-col class="ma-0 pa-0" cols="12">
           <router-view />
         </v-col>
       </v-row>

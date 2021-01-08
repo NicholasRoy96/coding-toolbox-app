@@ -2,7 +2,7 @@
   <v-toolbar tile flat min-height="120" max-height="120">
     <v-img src="../../assets/logo.png" class="logo" @click="$router.push('/')" />
     <v-spacer />
-    <v-btn class="link" large text depressed v-for="(link, index) in links" @click="$router.push(link.route)" :key="index">
+    <v-btn class="link" color="accent" large text depressed v-for="(link, index) in links" @click="$router.push(link.route)" :key="index">
       {{ link.text }}
     </v-btn>
     <v-spacer />
