@@ -6,6 +6,7 @@ import vuetify from '@/plugins/vuetify'
 import filters from '@/filters'
 import PrismicVue from '@prismicio/vue'
 import linkResolver from '@/plugins/prismic/linkResolver.js';
+import './assets/styles/index.css';
 
 Vue.use(PrismicVue, {
   endpoint: 'https://thecodingtoolbox.cdn.prismic.io/api/v2',

@@ -28,6 +28,27 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+
+:root {
+  // Colours
+  --c-primary: #F8FFF4;
+  --c-secondary: #6C969D;
+  --c-accent: #87BBA2;
+
+  // Spacers
+  --spacer-xxs: 4px;
+  --spacer-xs: 8px;
+  --spacer-sm: 16px;
+  --spacer-base: 24px;
+  --spacer-lg: 32px;
+  --spacer-xl: 48px;
+  --spacer-2xl: 64px;
+  --spacer-3xl: 128px;
+
+  // Fonts
+  --font-primary: 'Oxygen', sans-serif;
+}
+
 #app {
   font-family: 'Oxygen', sans-serif;
   -webkit-font-smoothing: antialiased;

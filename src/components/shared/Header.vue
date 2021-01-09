@@ -6,9 +6,6 @@
       {{ link.text }}
     </v-btn>
     <v-spacer />
-    <v-icon class="themeToggle" @click="$vuetify.theme.dark = !$vuetify.theme.dark">
-      mdi-brightness-4
-    </v-icon>
   </v-toolbar>
 </template>
 
