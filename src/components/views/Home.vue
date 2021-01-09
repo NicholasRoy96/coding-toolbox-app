@@ -17,7 +17,7 @@
       <v-col cols="12" md="4">
         <v-card class="ma-0" flat>
           <v-card-title class="landing__heading">Most recent articles</v-card-title>
-          <v-col cols="12" v-for="(post, index) in posts" :key="index">
+          <v-col cols="12" v-for="(post, index) in blog.posts" :key="index">
             <BlogCard :post="post" :hideImage="true"></BlogCard>
             <v-divider></v-divider>
           </v-col>
@@ -29,25 +29,21 @@
 
 <script>
 import BlogCard from '@/components/blog/Card.vue'
+import { mapState, mapActions } from 'vuex'
+
 export default {
   name: 'Home',
   components: {
     BlogCard
   },
-  data() {
-    return {
-      posts: []
-    }
+  computed: {
+    ...mapState([ 'blog' ])
   },
   methods: {
-    getPosts() {
-      this.$prismic.client.query('').then((response) => {
-        this.posts = response.results;
-      });
-    }
+    ...mapActions([ 'getPosts' ])
   },
-  created() {
-    this.getPosts()
+  async created() {
+    await this.getPosts()
   }
 }
 </script>

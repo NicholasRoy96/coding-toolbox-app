@@ -2,7 +2,7 @@
   <div>
     <h2 color="primary">Read the latest posts</h2>
     <v-row justify="center">
-        <v-row v-if="!posts.length" justify="center">
+        <v-row v-if="!blog.posts || !blog.posts.length" justify="center">
           <v-col cols="3" v-for="(skeleton, index) in [1,2,3]" :key="index">
             <v-skeleton-loader
               class="mx-auto"
@@ -11,7 +11,7 @@
             ></v-skeleton-loader>
           </v-col>
         </v-row>
-      <v-col v-else cols="3" v-for="(post, index) in posts" :key="index">
+      <v-col v-else cols="3" v-for="(post, index) in blog.posts" :key="index">
         <BlogCard :post="post"></BlogCard>
       </v-col>
     </v-row>
@@ -20,26 +20,15 @@
 
 <script>
 import BlogCard from '@/components/blog/Card.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Blog',
   components: {
     BlogCard
   },
-  data() {
-    return {
-      posts: []
-    }
-  },
-  methods: {
-    getPosts() {
-      this.$prismic.client.query('').then((response) => {
-        this.posts = response.results;
-      });
-    }
-  },
-  created() {
-    this.getPosts()
+  computed: {
+    ...mapState([ 'blog' ])
   }
 }
 </script>
