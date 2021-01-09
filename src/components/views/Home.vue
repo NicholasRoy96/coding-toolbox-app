@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <v-row class="hidden md:block">
+    <v-row>
       <v-col cols="12" md="5" offset-md="2">
         <v-card class="ma-0" flat>
           <v-card-title class="justify-left landing__heading">Welcome to The Coding Toolbox</v-card-title>
