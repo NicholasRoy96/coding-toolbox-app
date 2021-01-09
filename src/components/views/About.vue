@@ -1,31 +1,21 @@
 <template>
 <div class="about">
-    <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
-      <v-row class="mt-8" align="start" justify="center">
-        <v-card flat tile color="transparent">
-          <h1 class="secondary--text">What is The Coding Toolbox?</h1>
-          <v-col cols="6" offset="3">
-            <h2 class="font-weight-light text-center">If you have any questions, check out the FAQs before getting in touch</h2>
-          </v-col>
-        </v-card>
-      </v-row>
-    </v-parallax>
-    <v-row justify="center">
-      <v-col cols="5">
-        <v-card flat tile>
-          <v-img src="@/assets/laptop.jpg"  max-height="300"/>
-          <v-card-title class="text-left">Tried and tested tools</v-card-title>
-          <v-card-text class="text-left">Organised tools for all tech needs. From IDEs to Project Management, find everything you need right here</v-card-text>
-        </v-card>
-      </v-col>
-      <v-col cols="4">
-        <v-card flat tile>
-          <v-img src="@/assets/review.jpg"  max-height="300"/>
-          <v-card-title class="text-left">Reviews and Tutorials</v-card-title>
-          <v-card-text class="text-left">Get real life feedback on the tools being used. Make use of the blogs and tutorials helping you </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    <div>
+      <h1>What is The Coding Toolbox?</h1>
+      <h2>If you have any questions, check out the FAQs before getting in touch</h2>
+    </div>
+    <div class="flex justify-center">
+        <div>
+          <img src="@/assets/laptop.jpg" max-height="300" width="600"/>
+          <h3>Tried and tested tools</h3>
+          <p>Organised tools for all tech needs. From IDEs to Project Management, find everything you need right here</p>
+        </div>
+        <div>
+          <img src="@/assets/review.jpg" max-height="300" width="600"/>
+          <h3>Reviews and Tutorials</h3>
+          <p>Get real life feedback on the tools being used. Make use of the blogs and tutorials helping you </p>
+        </div>
+    </div>
     <v-row class="mt-4 mb-4" justify="center">
       <v-col cols="9">
         <v-divider />

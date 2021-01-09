@@ -10,6 +10,7 @@ import './assets/styles/index.css';
 
 Vue.use(PrismicVue, {
   endpoint: 'https://thecodingtoolbox.cdn.prismic.io/api/v2',
+  preview: false,
   linkResolver,
   apiOptions: { accessToken: process.env.VUE_APP_PRISMIC_API_KEY }
 });
