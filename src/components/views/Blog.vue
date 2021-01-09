@@ -1,20 +1,14 @@
 <template>
-  <div>
+  <div class="blog">
     <h2 color="primary">Read the latest posts</h2>
-    <v-row justify="center">
-        <v-row v-if="!blog.posts || !blog.posts.length" justify="center">
-          <v-col cols="3" v-for="(skeleton, index) in [1,2,3]" :key="index">
-            <v-skeleton-loader
-              class="mx-auto"
-              max-width="300"
-              type="card"
-            ></v-skeleton-loader>
-          </v-col>
-        </v-row>
-      <v-col v-else cols="3" v-for="(post, index) in blog.posts" :key="index">
-        <BlogCard :post="post"></BlogCard>
-      </v-col>
-    </v-row>
+    <div class="blog__grid">
+      <BlogCard
+        v-for="(post, i) in blog.posts"
+        :key="i"
+        :post="post"
+        class="blog__grid__card"
+      />
+    </div>
   </div>
 </template>
 
@@ -32,3 +26,25 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.blog {
+  &__grid {
+    padding: var(--spacer-xs);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @media (min-width: 1024px) {
+      padding: var(--spacer-lg) var(--spacer-2xl)
+    }
+    &__card {
+      flex: 0 0 50%;
+      padding: var(--spacer-sm);
+      @media (min-width: 1024px) {
+        flex: 0 0 33%;
+        padding: var(--spacer-lg);
+      }
+    }
+  }
+}
+</style>
