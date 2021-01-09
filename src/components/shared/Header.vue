@@ -1,12 +1,10 @@
 <template>
-  <v-toolbar tile flat min-height="120" max-height="120">
-    <v-img src="../../assets/logo.png" class="logo" @click="$router.push('/')" />
-    <v-spacer />
-    <v-btn class="link" color="accent" large text depressed v-for="(link, index) in links" @click="$router.push(link.route)" :key="index">
+  <toolbar class="toolbar">
+    <img src="../../assets/logo/SVG/Long_Logo_2_White.svg" id="logo" @click="$router.push('/').catch(err => {})" />
+    <button class="link mr-2 p-1" v-for="(link, index) in links" @click="$router.push(link.route).catch(err => {})" :key="index">
       {{ link.text }}
-    </v-btn>
-    <v-spacer />
-  </v-toolbar>
+    </button>
+  </toolbar>
 </template>
 
 <script>
@@ -34,16 +32,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.logo {
+.toolbar {
+  background-color: var(--c-secondary) !important;
+  max-height: 300px;
+}
+
+#logo {
   cursor: pointer;
-  max-width: 110px;
-  max-height: 110px;
+  max-height: 100px;
+  max-width: 300px;
   margin-left: 32px;
-  margin-top: 50px;
+  margin-top: 60px;
 }
 .link {
+  color: var(--c-primary) !important;
   font-size: 24px !important;
-  margin-top: 50px;
+  margin-bottom: 20px;
 }
 .themeToggle {
   margin-top: 50px;

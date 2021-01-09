@@ -2,7 +2,7 @@
   <div id="app">
     <v-app>
       <Header />
-      <v-row>
+      <v-row id="content">
         <v-col class="ma-0 pa-0" cols="12">
           <router-view />
         </v-col>
@@ -32,7 +32,7 @@ export default {
 :root {
   // Colours
   --c-primary: #F8FFF4;
-  --c-secondary: #6C969D;
+  --c-secondary: #232323;
   --c-accent: #87BBA2;
 
   // Spacers
@@ -69,4 +69,8 @@ export default {
     }
   }
 }
+// 
+// #content {
+//   background-color: #232323;
+// }
 </style>
