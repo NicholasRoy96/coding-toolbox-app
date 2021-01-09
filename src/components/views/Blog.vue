@@ -30,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 .blog {
   &__grid {
-    padding: var(--spacer-xs);
+    padding: var(--spacer-sm);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -39,10 +39,10 @@ export default {
     }
     &__card {
       flex: 0 0 50%;
-      padding: var(--spacer-sm);
+      padding: var(--spacer-xs);
       @media (min-width: 1024px) {
         flex: 0 0 33%;
-        padding: var(--spacer-lg);
+        padding: var(--spacer-sm);
       }
     }
   }

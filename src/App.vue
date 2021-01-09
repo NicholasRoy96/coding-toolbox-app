@@ -34,7 +34,8 @@ export default {
   --c-primary: #F8FFF4;
   --c-secondary: #232323;
   --c-accent: #87BBA2;
-
+  // &Background
+  --bg-primary: #212121;
   // Spacers
   --spacer-xxs: 4px;
   --spacer-xs: 8px;
