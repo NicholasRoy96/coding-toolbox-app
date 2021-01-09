@@ -1,6 +1,6 @@
 <template>
   <div class="blog">
-    <h2 color="primary">Read the latest posts</h2>
+    <h1>Read the latest posts</h1>
     <div class="blog__grid">
       <BlogCard
         v-for="(post, i) in blog.posts"
@@ -29,6 +29,12 @@ export default {
 
 <style lang="scss" scoped>
 .blog {
+  h1 {
+    margin-top: 30px;
+    color: var(--c-primary);
+    font-size: var(--font-2xl)
+  }
+  
   &__grid {
     padding: var(--spacer-sm);
     display: flex;

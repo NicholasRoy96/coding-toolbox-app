@@ -49,12 +49,13 @@ export default {
 <style lang="scss" scoped>
   .landing {
      &__heading {
+        margin: 30px 0;
         font-size: 36px;
         color: var(--c-accent);
      }
      &__content {
        font-size: 20px;
-       color: var(--c-secondary);
+       color: var(--c-primary);
      }
   }
 </style>

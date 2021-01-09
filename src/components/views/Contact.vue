@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="contact">
     <div v-if="error">
       {{ error }}
     </div>
@@ -58,7 +58,7 @@
           <v-divider vertical></v-divider>
         </v-col>
         <v-col cols="2">
-          <h2 class="text-left">Get Involved</h2>
+          <h1 class="text-left">Get Involved</h1>
           <p class="text-left mt-4">
             We are always looking to add new content and we need your help
           </p>
@@ -145,3 +145,20 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+.contact {
+  h1 {
+    margin: 30px 0;
+    font-size: var(--font-2xl);
+  }
+  h2 {
+    font-size: var(--font-xl);
+  }
+  h3 {
+    font-size: var(--font-lg);
+  }
+}
+
+</style>

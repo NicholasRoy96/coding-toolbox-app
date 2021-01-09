@@ -41,10 +41,11 @@ export default {
 
 <style scoped lang="scss">
 .header {
-  background-color: var(--c-secondary) !important;
+  background-color: var(--bg-primary);
   padding: 0 20px;
-  height: 80px;
-  
+  max-height: 80px;
+  min-height: 80px;
+
   &__menu {
     margin: 0 10px;
   }
@@ -55,12 +56,14 @@ export default {
   }
   
   &__link {
-    font-size: 24px !important;
+    font-size: var(--font-lg);
     margin-bottom: 20px;
-    color: var(--c-primary) !important;
+    color: var(--c-secondary);
+    &:focus, &:active {
+      outline: none;
+    }
     &:hover {
-      color: var(--c-accent) !important;
-      
+      color: var(--c-accent);
     }
   }
 }

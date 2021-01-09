@@ -96,5 +96,19 @@ export default {
     }
   }
 }
-
 </script>
+
+<style lang="scss" scoped>
+.about {
+  h1 {
+    margin: 30px 0;
+    font-size: var(--font-2xl);
+  }
+  h2 {
+    font-size: var(--font-xl);
+  }
+  h3 {
+    font-size: var(--font-lg);
+  }
+}
+</style>
