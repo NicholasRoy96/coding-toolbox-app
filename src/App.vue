@@ -2,7 +2,7 @@
   <div id="app">
     <v-app>
       <Header />
-      <v-row id="content">
+      <v-row>
         <v-col class="ma-0 pa-0" cols="12">
           <router-view />
         </v-col>
@@ -31,11 +31,13 @@ export default {
 
 :root {
   // Colours
-  --c-primary: #F8FFF4;
-  --c-secondary: #232323;
+  --c-primary: #474747;
+  --c-secondary: #F8FFF4;
   --c-accent: #87BBA2;
+
   // &Background
   --bg-primary: #212121;
+  
   // Spacers
   --spacer-xxs: 4px;
   --spacer-xs: 8px;
@@ -48,6 +50,15 @@ export default {
 
   // Fonts
   --font-primary: 'Oxygen', sans-serif;
+
+  // &Font-size
+  --font-xxs: 8px;
+  --font-xs: 12px;
+  --font-sm: 16px;
+  --font-base: 20px;
+  --font-lg: 24px;
+  --font-xl: 28px;
+  --font-2xl: 32px;
 }
 
 #app {
@@ -70,8 +81,4 @@ export default {
     }
   }
 }
-// 
-// #content {
-//   background-color: #232323;
-// }
 </style>

@@ -38,10 +38,10 @@ export default {
       padding: var(--spacer-lg) var(--spacer-2xl)
     }
     &__card {
-      flex: 0 0 50%;
+      flex: 0 0 100%;
       padding: var(--spacer-xs);
       @media (min-width: 1024px) {
-        flex: 0 0 33%;
+        flex: 0 0 50%;
         padding: var(--spacer-sm);
       }
     }

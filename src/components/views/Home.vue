@@ -4,7 +4,6 @@
       <v-col cols="12" md="5" offset-md="2">
         <div>
           <h1 class="landing__heading">Welcome to The Coding Toolbox</h1>
-          <v-spacer />
           <p class="text-left landing__content">
             Hi everyone and welcome. Thanks for checking out The Coding Toolbox. <br /><br />
             I'm Duncan. I work full time as a Technical Director for a Web Development company in London.
