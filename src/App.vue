@@ -1,14 +1,8 @@
 <template>
   <div id="app">
-    <v-app>
-      <Header />
-      <v-row>
-        <v-col class="ma-0 pa-0" cols="12">
-          <router-view />
-        </v-col>
-      </v-row>
-      <Footer />
-    </v-app>
+    <Header />
+    <router-view />
+    <Footer />
   </div>
 </template>
 

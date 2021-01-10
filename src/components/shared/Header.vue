@@ -1,11 +1,11 @@
 <template>
   <nav class="header flex items-center justify-between flex-wrap w-full z-10 p-0 top-0">
-    <div class="header__logo flex items-center flex-shrink-0 text-white mr-6">
+    <div class="header__logo flex items-center flex-shrink-0 text-white">
       <img src="@/assets/logo/SVG/Long_Logo_2_White.svg" @click="$router.push('/').catch(err => {})" />
     </div>
     <div class="header__menu block lg:hidden">
       <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white">
-        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+        <v-icon class="header__menu__icon">mdi-menu</v-icon>
       </button>
     </div>
     <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block pt-6 lg:pt-0" id="nav-content">
@@ -48,6 +48,16 @@ export default {
 
   &__menu {
     margin: 0 10px;
+
+    #nav-toggle {
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &__icon {
+      color: var(--c-secondary) !important;
+    }
   }
   
   &__logo {
