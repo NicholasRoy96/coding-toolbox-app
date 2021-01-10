@@ -1,15 +1,19 @@
 <template>
-  <footer>
-    <v-card flat tile width="100%" class="text-center">
-      <v-card-text>
-          <span class="mr-4"><strong>The Coding Toolbox</strong> {{ new Date().getFullYear() }}</span>
-          <a class="social mr-4" v-for="link in social" :key="link.icon" :href="link.url" target="_blank">
-            <v-icon>
-              {{ link.icon }}
-            </v-icon>
-          </a>
-      </v-card-text>
-    </v-card>
+  <footer class="footer flex flex-col justify-center">
+    <div class="mt-8 flex flex-row justify-center font-bold">
+      <button class="footer__links mx-6" v-for="(page, index) in pages" :key="index" @click="$router.push(page.link).catch(err => {})">
+        {{ page.text.toUpperCase() }}
+      </button>
+    </div>
+    <div class="mb-6 flex flex-row justify-center">
+      <a class="footer__social mx-5 pt-6" v-for="(link, index) in social" :key="index" :href="link.url" target="_blank">
+        <img :src="link.icon" height="25" width="25" />
+      </a>
+    </div>
+    <div class="mb-8 flex flex-row justify-center font-black">
+      <span class="mt-2 mx-4">THE CODING TOOLBOX {{ new Date().getFullYear() }}</span>
+      <img class="hidden lg:flex pt-1.5 cursor-pointer" height="200" width="200" src="@/assets/logo/SVG/Long_Logo_2_White.svg" @click="$router.push('/').catch(err => {})" />
+    </div>
   </footer>
 </template>
 
@@ -18,25 +22,42 @@ export default {
   name: 'Footer',
   data() {
     return {
+      pages: [{
+        text: 'Blog',
+        link: '/blog'
+      },{
+        text: 'About',
+        link: '/about'
+      },{
+        text: 'Get Involved',
+        link: '/contact'
+      }],
       social: [{
-        icon: 'mdi-github',
-        url: 'https://www.github.com/DuncanFenning1008'
-      }, {
-        icon: 'mdi-linkedin',
-        url: 'https://www.linkedin.com/in/duncanfenning'
-      }, {
-        icon: 'mdi-instagram',
+        icon: require('@/assets/icons/instagram.svg'),
         url: 'https://www.instagram.com/thecodingtoolbox/'
       }, {
-        icon: 'mdi-youtube',
+        icon: require('@/assets/icons/youtube.svg'),
         url: 'https://www.youtube.com/channel/UCbFkOXbrNKvyX5kPRyp7MVA'
+      }, {
+        icon: require('@/assets/icons/github.svg'),
+        url: 'https://www.github.com/DuncanFenning1008'
       }]
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  .footer {
+    background-color: var(--bg-primary);
+    font-size: var(--font-base);
+    height: 200px;
+    color: var(--c-secondary) !important;
+
+    button {
+      outline: none;
+    }
+  }
   .social {
     text-decoration: none;
   }
