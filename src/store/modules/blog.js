@@ -1,6 +1,7 @@
 const state = {
   posts: [],
-  categories: []
+  categories: [],
+  selectedCategory: null
 }
 
 const getters = {}

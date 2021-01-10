@@ -4,7 +4,8 @@
     <div class="post__content">
       <div class="post__heading">
         <h1 class="post__heading__title primary--text">{{ title }}</h1>
-        <h4 class="post__heading__subtitle">By {{ author }} | {{ date | formatDate }}</h4>
+        <h2 class="post__heading__subtitle">By {{ author }} | {{ date | formatDate }}</h2>
+        <h3 class="post__heading__subtitle">{{ category }}</h3>
       </div>
       <div v-for="(paragraph, index) in content" :key="index" class="post__text">
         {{ paragraph.text }}
@@ -37,6 +38,12 @@ export default {
         return ''
       }
       return this.post.author[0].text
+    },
+    category() {
+      if (!this.post || !this.post.category) {
+        return ''
+      }
+      return this.post.category
     },
     date() {
       if (!this.post || !this.post.blog_created_date) {
