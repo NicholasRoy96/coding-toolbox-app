@@ -8,10 +8,10 @@
         <v-icon @click="showMobileMenu = !showMobileMenu" class="header__menu__icon">mdi-menu</v-icon>
       </button>
     </div>
-    <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block pt-6 lg:pt-0" :class="{ hidden: showMobileMenu }" id="nav-content">
+    <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block pt-6 lg:pt-4" :class="{ hidden: showMobileMenu }" id="nav-content">
       <div class="lg:flex justify-end flex-1 items-center">
         <button class="header__link mr-8" v-for="(link, index) in links" @click="$router.push(link.route).catch(err => {})" :key="index">
-          {{ link.text }}
+          {{ link.text.toUpperCase() }}
         </button>
       </div>
     </div>
@@ -41,7 +41,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .header {
+  * {
+    font-family: var(--font-header)
+  }
+
   background-color: var(--bg-primary);
   padding: 0 20px;
 

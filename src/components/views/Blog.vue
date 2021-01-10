@@ -14,7 +14,7 @@
 
 <script>
 import BlogCard from '@/components/blog/Card.vue'
-import { mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'Blog',
@@ -23,6 +23,15 @@ export default {
   },
   computed: {
     ...mapState([ 'blog' ])
+  },
+  methods: {
+    ...mapActions([ 'getPosts' ])
+  },
+  created() {
+    const { blog } = this;
+    if (!blog || !blog.posts || !blog.posts.length) {
+      this.getPosts();
+    }
   }
 }
 </script>

@@ -21,7 +21,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,600;1,600&display=swap');
 
 :root {
   // Colours
@@ -43,7 +44,8 @@ export default {
   --spacer-3xl: 128px;
 
   // Fonts
-  --font-primary: 'Oxygen', sans-serif;
+  --font-primary: 'Lato', sans-serif;
+  --font-header: 'Raleway', sans-serif;
 
   // &Font-size
   --font-xxs: 8px;
@@ -56,7 +58,7 @@ export default {
 }
 
 #app {
-  font-family: 'Oxygen', sans-serif;
+  font-family: var(--font-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

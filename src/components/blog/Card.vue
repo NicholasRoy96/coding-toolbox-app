@@ -9,9 +9,6 @@
           </h2>
         </div>
       </div>
-      <!-- <h2 class="text-left pt-4 font-bold"></h2>
-      <p class="text-left">{{ post.data.blog_content[0].text }}</p>
-      <p class="text-left"><strong>{{ post.data.author[0].text }}</strong> | {{ post.first_publication_date | formatDate }}</p> -->
     </div>
   </div>
 </template>
