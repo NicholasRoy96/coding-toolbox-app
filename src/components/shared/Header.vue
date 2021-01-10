@@ -32,9 +32,6 @@ export default {
       },{
         text: 'About',
         route: '/about'
-      },{
-        text: 'Contact',
-        route: '/contact'
       }]
     }
   }
@@ -69,7 +66,7 @@ export default {
   }
   
   &__link {
-    font-size: var(--font-lg);
+    font-size: var(--font-base);
     margin-bottom: 20px;
     color: var(--c-secondary);
     &:focus, &:active {
