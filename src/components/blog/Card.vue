@@ -29,6 +29,8 @@ export default {
   .card {
     cursor: pointer;
     width: 100%;
+    position: relative;
+    padding-top: 48%;
     &:hover .card {
       &__overlay {
         opacity: 0.8;
@@ -38,18 +40,17 @@ export default {
       }
     }
     &__inner-div {
-      position: relative;
-      overflow: hidden;
-      border-radius: 8px;
-      height: 100%;
-    }
-    &__overlay {
       position: absolute;
       top: 0;
       right: 0;
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+    }
+    &__overlay {
       width: 100%;
       height: 100%;
-      background: #FFFFFF;
+      background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 40%);
       opacity: 0;
       display: flex;
       text-align: center;
@@ -62,16 +63,24 @@ export default {
         padding: 0 20%;
         &--title {
           color: var(--c-primary);
-          font-size: var(--font-xl);
+          font-size: var(--font-sm);
           text-transform: uppercase;
           line-height: 1.5;
           letter-spacing: 5px;
           font-weight: 700;
+          @media (min-width: 1024px) {
+            font-size: var(--font-xl);
+          }
         }
       }
     }
     &__image {
       width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      object-fit: cover;
       transform-origin: center center;
       -webkit-transition: 1.8s all ease;
       -moz-transition: 1.8s all ease;

@@ -33,23 +33,16 @@ export default {
     margin-top: 30px;
     color: var(--c-primary);
     font-size: var(--font-2xl)
-  }
-  
+  } 
   &__grid {
-    padding: var(--spacer-sm);
-    display: flex;
-    flex-wrap: wrap;
+    padding: var(--spacer-xs);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 30px;
     justify-content: space-between;
     @media (min-width: 1024px) {
-      padding: var(--spacer-lg) var(--spacer-2xl)
-    }
-    &__card {
-      flex: 0 0 100%;
-      padding: var(--spacer-xs);
-      @media (min-width: 1024px) {
-        flex: 0 0 50%;
-        padding: var(--spacer-sm);
-      }
+      padding: var(--spacer-lg) var(--spacer-2xl);
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }
