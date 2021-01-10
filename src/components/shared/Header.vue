@@ -5,11 +5,11 @@
     </div>
     <div class="header__menu block lg:hidden">
       <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white">
-        <v-icon class="header__menu__icon">mdi-menu</v-icon>
+        <v-icon @click="showMobileMenu = !showMobileMenu" class="header__menu__icon">mdi-menu</v-icon>
       </button>
     </div>
-    <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block pt-6 lg:pt-0" id="nav-content">
-      <div class="list-reset lg:flex justify-end flex-1 items-center">
+    <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block pt-6 lg:pt-0" :class="{ hidden: showMobileMenu }" id="nav-content">
+      <div class="lg:flex justify-end flex-1 items-center">
         <button class="header__link mr-8" v-for="(link, index) in links" @click="$router.push(link.route).catch(err => {})" :key="index">
           {{ link.text }}
         </button>
@@ -24,6 +24,7 @@ export default {
   name: 'Header',
   data() {
     return {
+      showMobileMenu: true,
       links: [{
         text: 'Blog',
         route: '/blog'
@@ -43,8 +44,6 @@ export default {
 .header {
   background-color: var(--bg-primary);
   padding: 0 20px;
-  max-height: 80px;
-  min-height: 80px;
 
   &__menu {
     margin: 0 10px;
@@ -61,7 +60,8 @@ export default {
   }
   
   &__logo {
-    margin: 0 10px 0 0;
+    margin: 10px;
+    padding: 10px;
     cursor: pointer;
   }
   
