@@ -6,8 +6,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,600;1,600&display=swap');
 
 :root {
-  --c-primary: #474747;
-  --c-secondary: #F8FFF4;
+  --c-primary: #212121;
+  --c-secondary: #B0B0B0;
   --c-accent: #87BBA2;
 
   --bg-primary: #212121;
@@ -31,4 +31,7 @@
   --font-lg: 24px;
   --font-xl: 28px;
   --font-2xl: 32px;
+  --font-3xl: 36px;
+  --font-4xl: 40px;
+  --font-fucking-massive: 64px;
 }

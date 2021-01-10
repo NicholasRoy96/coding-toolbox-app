@@ -27,7 +27,7 @@ export default {
     cursor: pointer;
     width: 100%;
     position: relative;
-    padding-top: 48%;
+    padding-top: 65%;
     &:hover .card {
       &__overlay {
         opacity: 0.8;
@@ -43,11 +43,12 @@ export default {
       overflow: hidden;
       height: 100%;
       width: 100%;
+      border-radius: 5px;
     }
     &__overlay {
       width: 100%;
       height: 100%;
-      background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 40%);
+      background: linear-gradient(0deg, rgba(255,255,255, 0.5) 0%, rgba(255,255,255,1) 25%);
       opacity: 0;
       display: flex;
       text-align: center;
@@ -57,7 +58,8 @@ export default {
       -ms-transition: 0.5s all ease;
       transition: 0.5s all ease;
       &__content {
-        padding: 0 20%;
+        max-width: 75%;
+        margin: 0 auto;
         &--title {
           color: var(--c-primary);
           font-size: var(--font-sm);
@@ -66,7 +68,7 @@ export default {
           letter-spacing: 5px;
           font-weight: 700;
           @media (min-width: 1024px) {
-            font-size: var(--font-xl);
+            font-size: var(--font-lg);
           }
         }
       }
