@@ -1,30 +1,54 @@
 <template>
   <div class="blog">
+
     <!-- Mobile Only -->
-    <div class="blog__headings lg:hidden pt-8">
-      <h1 class="pb-2">Blog</h1>
-      <h2 class="pb-2">Javascript</h2>
-      <img class="mx-auto" src="@/assets/icons/Line.svg" width="10%" />
-    </div>
-    <!-- Desktop Only -->
-    <div class="blog__banner hidden lg:flex">
-      <div class="blog__banner__content">
+    <div class="lg:hidden">
+      <div class="blog__headings lg:hidden pt-8">
         <h1 class="pb-2">Blog</h1>
-        <img class="pb-8" src="@/assets/icons/Line_White.svg" />
-        <h2>Javascript</h2>
+        <h2 class="pb-2">Javascript</h2>
+        <img class="mx-auto" src="@/assets/icons/Line.svg" width="10%" />
+      </div>
+      <div class="lg:px-16 pb-16">
+        <div class="blog__description">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </div>
+        <div class="blog__grid">
+          <BlogCard
+            v-for="(post, i) in blog.posts"
+            :key="i"
+            :post="post"
+            class="blog__grid__card"
+          />
+        </div>
       </div>
     </div>
-    <div class="blog__description">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+    <!-- Desktop Only -->
+    <div class="hidden lg:block">
+      <div class="blog__banner hidden lg:flex">
+        <div class="blog__banner__content">
+          <h1 class="pb-2">Blog</h1>
+          <img class="pb-8" src="@/assets/icons/Line_White.svg" />
+          <h2>Javascript</h2>
+        </div>
+      </div>
+      <div class="lg:px-16 pb-16">
+        <div class="blog__container lg:px-16 -mt-16 z-10">
+          <div class="blog__description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </div>
+          <div class="blog__grid">
+            <BlogCard
+              v-for="(post, i) in blog.posts"
+              :key="i"
+              :post="post"
+              class="blog__grid__card"
+            />
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="blog__grid">
-      <BlogCard
-        v-for="(post, i) in blog.posts"
-        :key="i"
-        :post="post"
-        class="blog__grid__card"
-      />
-    </div>
+
   </div>
 </template>
 
@@ -68,6 +92,12 @@ export default {
       font-weight: 600;
     }
   }
+  &__container {
+    position: relative;
+    box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background: white;
+  }
   &__banner {
     width: 100%;
     background-image: url("../../assets/reviews.jpg");
@@ -76,7 +106,7 @@ export default {
     position: relative;
     &__content {
       position: absolute;
-      top: 50%;
+      top: 40%;
       left: 50%;
       transform: translate(-50%, -50%);
       color: white;
@@ -112,9 +142,12 @@ export default {
     grid-gap: var(--spacer-sm);
     justify-content: space-between;
     @media (min-width: 1024px) {
-      padding: 0 var(--spacer-2xl);
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       grid-gap: var(--spacer-lg);
+      padding-bottom: var(--spacer-lg);
+    }
+    @media (min-width: 1200px) {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 }
