@@ -27,7 +27,10 @@ export default {
     cursor: pointer;
     width: 100%;
     position: relative;
-    padding-top: 65%;
+    padding-top: 42%;
+    @media (min-width: 1024px) {
+      padding-top: 65%;
+    }
     &:hover .card {
       &__overlay {
         opacity: 0.8;

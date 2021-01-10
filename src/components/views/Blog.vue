@@ -1,10 +1,17 @@
 <template>
   <div class="blog">
-    <div class="blog__banner">
+    <!-- Mobile Only -->
+    <div class="blog__headings lg:hidden pt-8">
+      <h1 class="pb-2">Blog</h1>
+      <h2 class="pb-2">Javascript</h2>
+      <img class="mx-auto" src="@/assets/icons/Line.svg" width="10%" />
+    </div>
+    <!-- Desktop Only -->
+    <div class="blog__banner hidden lg:flex">
       <div class="blog__banner__content">
         <h1 class="pb-2">Blog</h1>
         <img class="pb-8" src="@/assets/icons/Line_White.svg" />
-        <h2>Category 1</h2>
+        <h2>Javascript</h2>
       </div>
     </div>
     <div class="blog__description">
@@ -47,6 +54,20 @@ export default {
 
 <style lang="scss" scoped>
 .blog {
+  &__headings {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    h1 {
+      color: var(--c-primary);
+      font-size: var(--font-lg);
+      font-weight: 700;
+    }
+    h2 {
+      color: var(--c-secondary);
+      font-size: var(--font-base);
+      font-weight: 600;
+    }
+  }
   &__banner {
     width: 100%;
     background-image: url("../../assets/reviews.jpg");
@@ -77,12 +98,15 @@ export default {
     font-size: var(--font-sm);
     color: var(--c-secondary);
     line-height: 1.5;
-    padding: var(--spacer-2xl) 0;
+    padding: var(--spacer-sm) var(--spacer-lg);
+    @media (min-width: 1024px) {
+      padding: var(--spacer-2xl) 0;
+    }
   }
   &__grid {
     max-width: 1632px;
     margin: 0 auto;
-    padding: 0 var(--spacer-xs);
+    padding: var(--spacer-xs);
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: var(--spacer-sm);
