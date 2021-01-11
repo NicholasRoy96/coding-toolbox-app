@@ -1,32 +1,60 @@
 <template>
   <div class="home">
-    <div>
-      <h1 class="landing__heading">Welcome to The Coding Toolbox</h1>
-      <p class="text-left landing__content">
-        Hi everyone and welcome. Thanks for checking out The Coding Toolbox. <br /><br />
-        I'm Duncan. I work full time as a Technical Director for a Web Development company in London.
-        I spend my free time learning and sharing my experiences with you all.<br /><br />
-        The idea behind this <b>site</b>, <b>blog</b> and <b>YouTube channel</b> is to share awesome tech tips and tools to help you along your Software Engineering journies.<br /><br />
-        Hopefully you find this site useful. If you have any feedback for the tips and tools shared either here or on my channel, please get in touch!
-      </p>
-    </div>
-    <div>
-      <h2 class="landing__heading">Most recent articles</h2>
-      <div v-for="(post, index) in blog.posts" :key="index">
-        <BlogCard :post="post"></BlogCard>
+    <div class="hidden lg:block">
+      <div class="home__banner">
+      </div>
+      <div class="px-16">
+        <div class="home__container -mt-16 z-10">
+          <div class="main py-16 pl-16 pr-24">
+            <h3 class="pb-8">
+              Hi
+            </h3>
+            <p class="main__description">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <h3 class="pb-14">
+              What is the coding toolbox?
+            </h3>
+            <div class="flex">
+              <InfoCard :cardInfo="cardInfoArray[0]" class="w-1/2 pr-4"/>
+              <InfoCard :cardInfo="cardInfoArray[1]" class="w-1/2"/>
+            </div>
+          </div>
+          <div class="side py-16 px-12">
+            <h3>
+              Recent Articles
+            </h3>
+            <BlogCard
+              v-for="(post, i) in blog.posts.slice(0, 5)"
+              :key="i"
+              :post="post"
+              class="mb-2"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import InfoCard from '@/components/home/InfoCard.vue'
 import BlogCard from '@/components/blog/Card.vue'
 import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Home',
+  data () {
+    return {
+      cardInfoArray: [
+        { image: require('@/assets/laptop.jpg'), title: 'Tried and Test Tools', subtitle: 'Organised tools for all tech needs. From IDEs to Project Management, find everything you need right here.' },
+        { image: require('@/assets/reviews.jpg'), title: 'REVIEWS AND TUTORIALS', subtitle: 'Get real life feedback on the tools being used. Make use of the blogs and tutorials helping you..' }
+      ]
+    }
+  },
   components: {
-    BlogCard
+    BlogCard,
+    InfoCard
   },
   computed: {
     ...mapState([ 'blog' ])
@@ -41,15 +69,49 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .landing {
-     &__heading {
-        margin: 30px 0;
-        font-size: 36px;
-        color: var(--c-accent);
-     }
-     &__content {
-       font-size: 20px;
-       color: var(--c-primary);
-     }
+.home {
+  &__banner {
+    width: 100%;
+    background-image: url("../../assets/reviews.jpg");
+    padding-bottom: 37%;
+    background-position: 50% 50%;
+    position: relative;
+    @media (min-width: 1200px) {
+      padding-bottom: 30%;
+    }
   }
+  &__container {
+    position: relative;
+    box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background: white;
+    display: flex;
+    h3 {
+      text-transform: uppercase;
+      font-size: var(--font-2xl);
+      font-weight: bold;
+      line-height: 1.33;
+      color: var(--c-primary);
+      letter-spacing: 10%;
+    }
+    .main {
+      width: 70%;
+      text-align: start;
+      &__description {
+        font-size: var(--font-lg);
+        color: var(--c-secondary);
+        line-height: 1.25;
+        font-weight: 400;
+        padding-bottom: var(--spacer-2xl);
+      }
+    }
+    .side {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-secondary);
+      border-radius: 10px;
+    }
+  }
+}
 </style>

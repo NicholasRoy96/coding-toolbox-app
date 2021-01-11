@@ -8,10 +8,10 @@
         <h2 class="pb-2">Javascript</h2>
         <img class="mx-auto" src="@/assets/icons/Line.svg" width="10%" />
       </div>
-      <div class="lg:px-16 pb-16">
-        <div class="blog__description">
+      <div class="pb-16">
+        <p class="blog__description">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </div>
+        </p>
         <div class="blog__grid">
           <BlogCard
             v-for="(post, i) in blog.posts"
@@ -32,8 +32,8 @@
           <h2>Javascript</h2>
         </div>
       </div>
-      <div class="lg:px-16 pb-16">
-        <div class="blog__container lg:px-16 -mt-16 z-10">
+      <div class="px-16 pb-16">
+        <div class="blog__container px-16 -mt-16 z-10">
           <div class="blog__description">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </div>
@@ -101,9 +101,12 @@ export default {
   &__banner {
     width: 100%;
     background-image: url("../../assets/reviews.jpg");
-    padding-bottom: 25%;
+    padding-bottom: 37%;
     background-position: 50% 50%;
     position: relative;
+    @media (min-width: 1200px) {
+      padding-bottom: 30%;
+    }
     &__content {
       position: absolute;
       top: 40%;

@@ -7,10 +7,11 @@
 
 :root {
   --c-primary: #212121;
-  --c-secondary: #B0B0B0;
+  --c-secondary: #a7a6a6;
   --c-accent: #87BBA2;
 
   --bg-primary: #212121;
+  --bg-secondary: #FBFBFB;
   
   --spacer-xxs: 4px;
   --spacer-xs: 8px;
