@@ -9,23 +9,18 @@
         <v-icon @click="showMobileMenu = !showMobileMenu" class="header__menu__icon">mdi-menu</v-icon>
       </button>
     </div>
-    <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block pt-6 lg:pt-4" :class="{ hidden: showMobileMenu }" id="nav-content">
-      <div class="lg:flex justify-end flex-1 items-center">
-        <button class="header__link mr-8" v-for="(link, index) in links" @click="$router.push(link.route).catch(err => {})" :key="index">
-          {{ link.text.toUpperCase() }}
-        </button>
-      </div>
-    </div>
+    <MobileMenu v-if="showMobileMenu" :items="links" @close="showMobileMenu = false" />
   </nav>
 </template>
 
 <script>
+import MobileMenu from './MobileMenu'
 
 export default {
   name: 'Header',
   data() {
     return {
-      showMobileMenu: true,
+      showMobileMenu: false,
       links: [{
         text: 'Blog',
         route: '/blog'
@@ -34,6 +29,9 @@ export default {
         route: '/about'
       }]
     }
+  },
+  components: {
+    MobileMenu
   }
 }
 </script>
