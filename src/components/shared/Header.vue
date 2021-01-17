@@ -4,12 +4,23 @@
       <img class="hidden lg:flex my-4" src="@/assets/logo/SVG/Long_Logo_2_White.svg" @click="$router.push('/').catch(err => {})" />
       <img class="py-0 my-0 lg:hidden" src="@/assets/logo/Coding_Toolbox_Logo_White.jpg" height="120" width="120" @click="$router.push('/').catch(err => {})" />
     </div>
+    <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block pt-6 lg:pt-4 hidden" :class="{ hidden: showMobileMenu }" id="nav-content">
+      <div class="lg:flex justify-end flex-1 items-center">
+        <button class="header__link mr-8 uppercase" v-for="(link, index) in links" @click="$router.push(link.route).catch(err => {})" :key="index">
+          {{ link.text }}
+        </button>
+      </div>
+    </div>
     <div class="header__menu block lg:hidden">
       <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white">
         <v-icon @click="showMobileMenu = !showMobileMenu" class="header__menu__icon">mdi-menu</v-icon>
       </button>
+      <MobileMenu
+        :menuActive="showMobileMenu"
+        :items="links"
+        @close="showMobileMenu = false"
+      />
     </div>
-    <MobileMenu v-if="showMobileMenu" :items="links" @close="showMobileMenu = false" />
   </nav>
 </template>
 

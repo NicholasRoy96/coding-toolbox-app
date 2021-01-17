@@ -1,7 +1,7 @@
 <template>
-  <section class="menu">
+  <section class="menu h-0" :class="{ 'h-screen': menuActive }">
     <div class="menu__bar">
-      <h1>Toolbox</h1>
+      <img class="w-1/3" src="@/assets/logo/SVG/Mid_Logo_Black.svg" @click="$router.push('/').catch(err => {})" />
       <div @click="$emit('close')">Close</div>
     </div>
     <div class="menu__container">
@@ -18,6 +18,11 @@
 export default {
   name: 'MobileMenu',
   props: {
+    menuActive: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
     items: {
       type: Array,
       required: true
@@ -29,13 +34,14 @@ export default {
 <style scoped lang="scss">
 .menu {
   width: 100%;
-  height: 100%;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 1;
   overflow-x: hidden;
-  background: black;
+  overflow-y: hidden;
+  background: white;
+  transition: 0.5s ease-in-out;
   &__bar {
     padding: var(--spacer-lg);
     display: flex;
@@ -43,6 +49,13 @@ export default {
   }
   &__container {
     text-align: center;
+    h2 {
+      font-family: var(--font-primary);
+      color: var(--c-primary);
+      font-size: var(--font-4xl);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
   }
 }
 </style>
