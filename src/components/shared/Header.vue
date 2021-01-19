@@ -13,18 +13,15 @@
     </div>
     <div class="header__menu block lg:hidden">
       <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white">
-        <v-icon @click="showMobileMenu = !showMobileMenu" class="header__menu__icon">mdi-menu</v-icon>
+        <v-icon @click="toggleMobileMenu" class="header__menu__icon">mdi-menu</v-icon>
       </button>
-      <MobileMenu
-        :menuActive="showMobileMenu"
-        :items="links"
-        @close="showMobileMenu = false"
-      />
+      <MobileMenu />
     </div>
   </nav>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import MobileMenu from './MobileMenu'
 
 export default {
@@ -43,6 +40,9 @@ export default {
   },
   components: {
     MobileMenu
+  },
+  methods: {
+    ...mapActions([ 'toggleMobileMenu' ])
   }
 }
 </script>
