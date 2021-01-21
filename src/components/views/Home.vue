@@ -19,6 +19,14 @@
               <InfoCard :cardInfo="cardInfoArray[0]" class="w-1/2 pr-4"/>
               <InfoCard :cardInfo="cardInfoArray[1]" class="w-1/2"/>
             </div>
+            <h3>
+              Why the coding toolbox?
+            </h3>
+            <div class="flex">
+              <NumberedCard :cardInfo="numberedCardArray[0]" class="w-1/3 pr-2" />
+              <NumberedCard :cardInfo="numberedCardArray[1]" class="w-1/3 pr-2" />
+              <NumberedCard :cardInfo="numberedCardArray[2]" class="w-1/3" />
+            </div>
           </div>
           <div class="side py-16 px-12">
             <h3>
@@ -39,6 +47,7 @@
 
 <script>
 import InfoCard from '@/components/home/InfoCard.vue'
+import NumberedCard from '@/components/home/NumberedCard.vue'
 import BlogCard from '@/components/blog/Card.vue'
 import { mapState, mapActions } from 'vuex'
 
@@ -49,12 +58,18 @@ export default {
       cardInfoArray: [
         { image: require('@/assets/laptop.jpg'), title: 'Tried and Test Tools', subtitle: 'Organised tools for all tech needs. From IDEs to Project Management, find everything you need right here.' },
         { image: require('@/assets/reviews.jpg'), title: 'REVIEWS AND TUTORIALS', subtitle: 'Get real life feedback on the tools being used. Make use of the blogs and tutorials helping you..' }
+      ],
+      numberedCardArray: [
+        { image: require('@/assets/laptop.jpg'), number: '1', title: 'Independent Reviews', subtitle: 'Organised tools for all tech needs. From IDEs to Project Management, find everything you need right here.' },
+        { image: require('@/assets/reviews.jpg'), number: '2', title: 'Everything in one place', subtitle: 'Get real life feedback on the tools being used. Make use of the blogs and tutorials helping you..' },
+        { image: require('@/assets/reviews.jpg'), number: '3', title: 'Top tips and tricks', subtitle: 'Get real life feedback on the tools being used. Make use of the blogs and tutorials helping you..' }
       ]
     }
   },
   components: {
     BlogCard,
-    InfoCard
+    InfoCard,
+    NumberedCard
   },
   computed: {
     ...mapState([ 'blog' ])

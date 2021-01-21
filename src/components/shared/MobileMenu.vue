@@ -1,8 +1,8 @@
 <template>
   <section class="menu h-0" :class="{ 'h-screen': menuOpen }">
     <div class="menu__bar">
-      <img class="w-1/3" src="@/assets/logo/SVG/Mid_Logo_Black.svg" @click="$router.push('/').catch(err => {}); toggleMobileMenu()" />
-      <img @click="toggleMobileMenu" width="20" class="" src="@/assets/icons/close.svg" />
+      <img class="w-1/3 cursor-pointer" src="@/assets/logo/SVG/Mid_Logo_Black.svg" @click="$router.push('/').catch(err => {}); toggleMobileMenu()" />
+      <img @click="toggleMobileMenu" width="20" class="cursor-pointer" src="@/assets/icons/close.svg" />
     </div>
     <div class="menu__container pt-4">
       <div class="pb-12">
