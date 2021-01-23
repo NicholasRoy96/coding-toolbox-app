@@ -18,9 +18,9 @@
           <h3 class="pt-2">{{ category }}</h3>
         </router-link>
       </div>
-      <router-link to="/about" @click.native="toggleMobileMenu">
+      <!-- <router-link to="/about" @click.native="toggleMobileMenu">
         <h2>About</h2>
-      </router-link>
+      </router-link> -->
     </div>
   </section>
 </template>

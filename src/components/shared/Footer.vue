@@ -1,9 +1,9 @@
 <template>
   <footer class="footer flex flex-col justify-center">
     <div class="mt-8 flex flex-row justify-center font-bold">
-      <button class="footer__links mx-6" v-for="(page, index) in pages" :key="index" @click="$router.push(page.link).catch(err => {})">
+      <!-- <button class="footer__links mx-6" v-for="(page, index) in pages" :key="index" @click="$router.push(page.link).catch(err => {})">
         {{ page.text.toUpperCase() }}
-      </button>
+      </button> -->
     </div>
     <div class="mb-6 flex flex-row justify-center">
       <a class="footer__social mx-5 pt-6" v-for="(link, index) in social" :key="index" :href="link.url" target="_blank">
@@ -22,16 +22,16 @@ export default {
   name: 'Footer',
   data() {
     return {
-      pages: [{
-        text: 'Blog',
-        link: '/blog'
-      },{
-        text: 'About',
-        link: '/about'
-      },{
-        text: 'Get Involved',
-        link: '/contact'
-      }],
+      // pages: [{
+      //   text: 'Blog',
+      //   link: '/blog'
+      // },{
+      //   text: 'About',
+      //   link: '/about'
+      // },{
+      //   text: 'Get Involved',
+      //   link: '/contact'
+      // }],
       social: [{
         icon: require('@/assets/icons/instagram.svg'),
         url: 'https://www.instagram.com/thecodingtoolbox/'
