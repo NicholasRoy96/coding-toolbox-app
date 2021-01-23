@@ -1,14 +1,18 @@
 <template>
   <div class="card" @click='$router.push({ name: "Blog Post", params: { id: post.uid } })'>
-    <div class="card__inner-div">
-      <img :src="post.data.thumbnail.url" class="card__image" />
-      <div class="card__overlay">
-        <div class="card__overlay__content">
-          <h2 class="card__overlay__content--title">
-            {{ post.data.blog_title[0].text }}
-          </h2>
-        </div>
+    <div class="card__image-container">
+      <img :src="post.data.thumbnail.url" />
+      <div class="card__image-container__tag">
+        Category
       </div>
+    </div>
+    <div class="card__content">
+      <h3>
+        {{ post.data.blog_title[0].text }}
+      </h3>
+      <p>
+        Fetch and transitioning server-render data with Next.js to realtime Firestore data
+      </p>
     </div>
   </div>
 </template>
@@ -26,68 +30,64 @@ export default {
   .card {
     cursor: pointer;
     width: 100%;
-    position: relative;
-    padding-top: 42%;
-    @media (min-width: 1024px) {
-      padding-top: 65%;
-    }
-    &:hover .card {
-      &__overlay {
-        opacity: 0.8;
+    -webkit-transition: 0.5s all ease;
+    -moz-transition: 0.5s all ease;
+    -ms-transition: 0.5s all ease;
+    transition: 0.5s all ease;
+    &:hover {
+      transform: scale(1.03);
+      .card {
+        &__content {
+          filter: brightness(120%);
+        }
       }
-      &__image {
-        transform: scale(1.07);
+    }
+    &__image-container {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 50%;
+      img {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      &__tag {
+        position: absolute;
+        top: var(--spacer-base);
+        left: var(--spacer-base);
+        background-color: darkmagenta;
+        color: white;
+        border-radius: 16px;
+        padding: var(--spacer-xxs) var(--spacer-xs);
+        font-weight: bold;
       }
     }
-    &__inner-div {
-      position: absolute;
-      top: 0;
-      right: 0;
-      overflow: hidden;
-      height: 100%;
-      width: 100%;
-      border-radius: 5px;
-    }
-    &__overlay {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(0deg, rgba(255,255,255, 0.5) 0%, rgba(255,255,255,1) 25%);
-      opacity: 0;
-      display: flex;
-      text-align: center;
-      align-items: center;
+    &__content {
       -webkit-transition: 0.5s all ease;
       -moz-transition: 0.5s all ease;
       -ms-transition: 0.5s all ease;
       transition: 0.5s all ease;
-      &__content {
-        max-width: 75%;
-        margin: 0 auto;
-        &--title {
-          color: var(--c-primary);
-          font-size: var(--font-sm);
-          text-transform: uppercase;
-          line-height: 1.5;
-          letter-spacing: 5px;
-          font-weight: 700;
-          @media (min-width: 1024px) {
-            font-size: var(--font-lg);
-          }
-        }
+      text-align: start;
+      background-color: var(--bg-grey);
+      padding: var(--spacer-lg) var(--spacer-sm);
+      letter-spacing: 0.5px;
+      h3 {
+        color: var(--c-white);
+        font-family: var(--font-header);
+        font-size: var(--font-lg);
+        font-weight: bold;
+        margin-bottom: var(--spacer-xs);
       }
-    }
-    &__image {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      right: 0;
-      object-fit: cover;
-      transform-origin: center center;
-      -webkit-transition: 1.8s all ease;
-      -moz-transition: 1.8s all ease;
-      -ms-transition: 1.8s all ease;
-      transition: 1.8s all ease;
+      p {
+        color: var(--c-secondary);
+        font-family: var(--font-primary);
+        font-size: var(--font-sm);
+      }
     }
   }
 </style>
