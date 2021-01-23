@@ -16,6 +16,9 @@ const actions = {
     } catch (e) {
       // suppress error
     }
+  },
+  selectCategory({ commit }, category) {
+    commit( 'setCategory', category )
   }
 }
 
@@ -25,6 +28,9 @@ const mutations = {
   },
   setCategories( state, categories ) {
     state.categories = categories
+  },
+  setCategory( state, category ) {
+    state.selectedCategory = category
   }
 }
 

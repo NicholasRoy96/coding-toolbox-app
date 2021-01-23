@@ -5,12 +5,12 @@
     <div class="lg:hidden">
       <div class="blog__headings lg:hidden pt-8">
         <h1 class="pb-2">Blog</h1>
-        <h2 class="pb-2">Javascript</h2>
+        <h2 class="pb-2">{{ category }}</h2>
         <img class="mx-auto" src="@/assets/icons/Line.svg" width="10%" />
       </div>
       <div class="pb-16">
         <p class="blog__description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          {{ description }}
         </p>
         <div class="blog__grid">
           <BlogCard
@@ -29,13 +29,13 @@
         <div class="blog__banner__content">
           <h1 class="pb-2">Blog</h1>
           <img class="pb-8" src="@/assets/icons/Line_White.svg" />
-          <h2>Javascript</h2>
+          <h2>{{ category }}</h2>
         </div>
       </div>
       <div class="px-16 pb-16">
         <div class="blog__container px-16 -mt-16 z-10">
           <div class="blog__description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            {{ description }}
           </div>
           <div class="blog__grid">
             <BlogCard
@@ -62,7 +62,13 @@ export default {
     BlogCard
   },
   computed: {
-    ...mapState([ 'blog' ])
+    ...mapState([ 'blog' ]),
+    category() {
+      return this.blog.selectedCategory || 'ALL'
+    },
+    description() {
+      return 'Welcome to The Coding Toolbox. Read articles on Web Development tips and tricks, career advice and useful tools which you can use to make your life easier'
+    }
   },
   methods: {
     ...mapActions([ 'getPosts' ])

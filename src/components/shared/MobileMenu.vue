@@ -13,7 +13,7 @@
           v-for="(category, i) in blogCategories"
           :key="i"
           to="/blog"
-          @click.native="toggleMobileMenu"
+          @click.native="navigate(category)"
         >
           <h3 class="pt-2">{{ category }}</h3>
         </router-link>
@@ -37,7 +37,11 @@ export default {
     })
   },
   methods: {
-    ...mapActions([ 'toggleMobileMenu' ])
+    ...mapActions([ 'toggleMobileMenu', 'selectCategory' ]),
+    navigate(category) {
+      this.selectCategory(category)
+      this.toggleMobileMenu()
+    }
   }
 }
 </script>
