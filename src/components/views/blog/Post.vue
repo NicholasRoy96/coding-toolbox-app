@@ -1,31 +1,38 @@
 <template>
-  <section v-if="!loading" class="post">
-    <img :src="image.url" class="post__image" />
-    <div class="post__content">
-      <div class="post__heading">
-        <h1 class="post__heading__title primary--text">{{ title }}</h1>
-        <h2 class="post__heading__subtitle">By {{ author }} | {{ date | formatDate }}</h2>
-        <h3 class="post__heading__subtitle">{{ category }}</h3>
+  <section v-if="!loading" class="blog-post">
+    <div class="blog-post__content">
+      <div class="blog-post__heading">
+        <h1 class="blog-post__heading__title primary--text">{{ title }}</h1>
+        <h2 class="blog-post__heading__subtitle">By {{ author }} | {{ date | formatDate }}</h2>
+        <h3 class="blog-post__heading__subtitle">{{ category }}</h3>
       </div>
-      <div v-for="(paragraph, index) in content" :key="index" class="post__text">
-        <p v-if="paragraph.spans.length && paragraph.spans[0].data.label === 'code-block'" class="code-block">
-          {{ paragraph.text }}
-        </p>
-        <p v-else>
-          {{ paragraph.text }}
-        </p>
-      </div>
+      <prismic-rich-text :field="content" :htmlSerializer="HTMLSerializer" class="blog-post__text" />
     </div>
   </section>
 </template>
 
 <script>
+import prismicDOM from 'prismic-dom'
+
+const Elements = prismicDOM.RichText.Elements
+
+const HTMLSerializer = function(type, element, content, children) {
+  if (type === Elements.preformatted) {
+    return `<pre class="code-block">${children.join(' ')}</pre>`
+  }
+  if (content === '') {
+    return'<p class="spacer" />'
+  }
+  return null
+}
+
 export default {
   name: 'Post',
   data () {
     return {
       post: null,
-      loading: true
+      loading: true,
+      HTMLSerializer
     };
   },
   computed: {
@@ -91,45 +98,67 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .post {
-    &__image {
-      width: 100%;
+.blog-post {
+  &__content {
+    margin: 0 auto;
+    max-width: 760px;
+    padding: var(--spacer-lg);
+    color: #292929;
+    text-align: left;
+    font-weight: 400
+  }
+  &__heading {
+    padding-bottom: var(--spacer-xl);
+    letter-spacing: -0.5px;
+    &__title {
+      font-weight: 600;
+      padding-bottom: var(--spacer-sm);
+      font-size: var(--font-massive);
+      line-height: 60px;
     }
-    &__content {
-      margin: 0 auto;
-      max-width: 680px;
-      padding: 32px;
-      color: #292929;
-      text-align: left;
-      font-weight: 400
-    }
-    &__heading {
-      padding-bottom: 40px;
-      letter-spacing: -0.5px;
-      &__title {
-        font-weight: 500;
-        padding-bottom: 16px;
-        font-size: 48px;
-        line-height: 60px;
-      }
-      &__subtitle {
-        font-weight: 500;
-        font-size: 22px;
-        color: #757575; 
-        line-height: 28px;
-      }
-    }
-    &__text {
-      padding-bottom: 16px;
-      font-size: 20px;
-      line-height: 32px;
-      .code-block {
-        background-color: var(--c-darkblue);
-        color: white;
-        margin: var(--spacer-lg) -128px;
-        padding: var(--spacer-lg);
-        font-size: var(--font-sm);
-      }
+    &__subtitle {
+      font-weight: 500;
+      font-size: var(--font-lg);
+      color: #757575; 
+      line-height: 28px;
     }
   }
+}
+</style>
+
+<style lang="scss">
+.blog-post {
+  &__text {
+    padding-bottom: 16px;
+    font-size: 20px;
+    line-height: 32px;
+    h1 {
+      font-size: var(--font-3xl);
+      margin-bottom: var(--spacer-base);
+    }
+    h2 {
+      font-size: var(--font2xl);
+      margin-bottom: var(--spacer-sm)
+    }
+    h3 {
+      font-size: var(--font-xl);
+      margin-bottom: var(--spacer-xs);
+    }
+    h4 {
+      font-size: var(--font-lg);
+      margin-bottom: var(--spacer-xs);
+    }
+    .spacer {
+      padding-bottom: var(--spacer-xl);
+    }
+    .code-block {
+      background-color: var(--c-darkblue);
+      color: white;
+      margin: var(--spacer-lg) 0;
+      padding: var(--spacer-lg);
+      font-size: var(--font-sm);
+      overflow-x: scroll;
+    }
+  }
+}
 </style>

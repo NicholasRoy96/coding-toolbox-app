@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Header from '@/components/shared/Header.vue'
 import Footer from '@/components/shared/Footer.vue'
 
@@ -15,6 +16,15 @@ export default {
   components: {
     Header,
     Footer
+  },
+  methods: {
+    ...mapActions([ 'getPosts' ])
+  },
+  async created() {
+    const { blog } = this;
+    if (!blog || !blog.posts || !blog.posts.length) {
+      await this.getPosts();
+    }
   }
 }
 

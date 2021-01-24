@@ -12,7 +12,7 @@
       <!-- </div> -->
     </div>
     <div class="header__menu block lg:hidden">
-      <button @click="toggleMobileMenu" id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white">
+      <button @click="toggleMobileMenu" id="nav-toggle" class="flex items-center px-3 py-2">
         <img class="header__menu__icon" src="@/assets/icons/menu.svg" width="20" />
       </button>
       <MobileMenu />
@@ -66,7 +66,7 @@ export default {
     }
 
     &__icon {
-      color: var(--c-secondary) !important;
+      filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(159deg) brightness(104%) contrast(102%);
     }
   }
   

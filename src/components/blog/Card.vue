@@ -100,6 +100,10 @@ export default {
         font-size: var(--font-lg);
         font-weight: bold;
         margin-bottom: var(--spacer-xs);
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
         height: 72px;
       }
       p {

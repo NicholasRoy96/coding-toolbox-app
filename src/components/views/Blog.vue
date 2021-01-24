@@ -54,7 +54,7 @@
 
 <script>
 import BlogCard from '@/components/blog/Card.vue'
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Blog',
@@ -68,15 +68,6 @@ export default {
     },
     description() {
       return 'Welcome to The Coding Toolbox. Read articles on Web Development tips and tricks, career advice and useful tools which you can use to make your life easier'
-    }
-  },
-  methods: {
-    ...mapActions([ 'getPosts' ])
-  },
-  created() {
-    const { blog } = this;
-    if (!blog || !blog.posts || !blog.posts.length) {
-      this.getPosts();
     }
   }
 }
@@ -155,7 +146,7 @@ export default {
       grid-gap: var(--spacer-lg);
       padding-bottom: var(--spacer-lg);
     }
-    @media (min-width: 1200px) {
+    @media (min-width: 1400px) {
       grid-template-columns: repeat(3, 1fr);
     }
   }

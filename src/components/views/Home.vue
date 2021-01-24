@@ -49,7 +49,7 @@
 import InfoCard from '@/components/home/InfoCard.vue'
 import NumberedCard from '@/components/home/NumberedCard.vue'
 import BlogCard from '@/components/blog/Card.vue'
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Home',
@@ -73,12 +73,6 @@ export default {
   },
   computed: {
     ...mapState([ 'blog' ])
-  },
-  methods: {
-    ...mapActions([ 'getPosts' ])
-  },
-  async created() {
-    await this.getPosts()
   }
 }
 </script>
