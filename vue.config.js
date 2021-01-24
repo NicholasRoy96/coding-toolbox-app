@@ -12,8 +12,5 @@ module.exports = {
         'config': `${appRoot}/config`
       }
     }
-  },
-  'transpileDependencies': [
-    'vuetify'
-  ]
+  }
 }

@@ -2,8 +2,8 @@
   <div class="card" @click='$router.push({ name: "Blog Post", params: { id: post.uid } })'>
     <div class="card__image-container">
       <img :src="post.data.thumbnail.url" />
-      <div class="card__image-container__tag">
-        Category
+      <div class="card__image-container__category" :style="`background-color: ${categoryColours[post.data.category]}`">
+        {{ post.data.category }}
       </div>
     </div>
     <div class="card__content">
@@ -13,6 +13,15 @@
       <p>
         Fetch and transitioning server-render data with Next.js to realtime Firestore data
       </p>
+      <div class="card__content__tags">
+        <div
+          v-for="(tag, i) in post.tags"
+          :key="i"
+          class="card__content__tags--tag"
+        >
+          #{{ tag }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -22,6 +31,15 @@ export default {
   name: 'BlogCard',
   props: {
     post: { type: Object, required: true }
+  },
+  computed: {
+    categoryColours () {
+      return {
+        'Career': 'var(--c-darkblue)',
+        'Code': 'var(--c-lightorange)',
+        'Tools': 'var(--c-bluegreen)'
+      }
+    }
   }
 }
 </script>
@@ -36,6 +54,7 @@ export default {
     transition: 0.5s all ease;
     &:hover {
       transform: scale(1.03);
+      box-shadow: 6px 6px 4px var(--c-secondary);
       .card {
         &__content {
           filter: brightness(120%);
@@ -56,14 +75,13 @@ export default {
         height: 100%;
         object-fit: cover;
       }
-      &__tag {
+      &__category {
         position: absolute;
         top: var(--spacer-base);
         left: var(--spacer-base);
-        background-color: darkmagenta;
         color: white;
         border-radius: 16px;
-        padding: var(--spacer-xxs) var(--spacer-xs);
+        padding: var(--spacer-xxs) var(--spacer-sm);
         font-weight: bold;
       }
     }
@@ -82,11 +100,26 @@ export default {
         font-size: var(--font-lg);
         font-weight: bold;
         margin-bottom: var(--spacer-xs);
+        height: 72px;
       }
       p {
         color: var(--c-secondary);
         font-family: var(--font-primary);
         font-size: var(--font-sm);
+        margin-bottom: var(--spacer-base);
+      }
+      &__tags {
+        display: flex;
+        &--tag {
+          background-color: var(--c-darkblue);
+          color: var(--c-white);
+          font-size: var(--font-xs);
+          font-weight: 600;
+          padding: var(--spacer-xxs) var(--spacer-xs);
+          &:not(:last-child) {
+            margin-right: var(--spacer-xxs);
+          }
+        }
       }
     }
   }
