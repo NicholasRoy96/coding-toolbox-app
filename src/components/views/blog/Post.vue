@@ -8,7 +8,12 @@
         <h3 class="post__heading__subtitle">{{ category }}</h3>
       </div>
       <div v-for="(paragraph, index) in content" :key="index" class="post__text">
-        {{ paragraph.text }}
+        <p v-if="paragraph.spans.length && paragraph.spans[0].data.label === 'code-block'" class="code-block">
+          {{ paragraph.text }}
+        </p>
+        <p v-else>
+          {{ paragraph.text }}
+        </p>
       </div>
     </div>
   </section>
@@ -118,6 +123,13 @@ export default {
       padding-bottom: 16px;
       font-size: 20px;
       line-height: 32px;
+      .code-block {
+        background-color: var(--c-darkblue);
+        color: white;
+        margin: var(--spacer-lg) -128px;
+        padding: var(--spacer-lg);
+        font-size: var(--font-sm);
+      }
     }
   }
 </style>
