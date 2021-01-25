@@ -1,5 +1,5 @@
 <template>
-  <div class="card" @click='$router.push({ name: "Blog Post", params: { id: post.uid } })'>
+  <div class="card" @click='viewBlog'>
     <div class="card__image-container">
       <img :src="post.data.thumbnail.url" />
       <div class="card__image-container__category" :style="`background-color: ${categoryColours[post.data.category]}`">
@@ -28,10 +28,17 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'BlogCard',
   props: {
     post: { type: Object, required: true }
+  },
+  data() {
+    return {
+      blog: null
+    }
   },
   computed: {
     categoryColours () {
@@ -39,6 +46,20 @@ export default {
         'Career': 'var(--c-darkblue)',
         'Code': 'var(--c-lightorange)',
         'Tools': 'var(--c-bluegreen)'
+      }
+    }
+  },
+  methods: {
+    ...mapActions([ 'selectBlog' ]),
+    getContent () {
+    
+    },
+    async viewBlog() {
+      const blog = await this.$prismic.client.getByUID('blog_post', this.post.uid, { fetchLinks: 'author.name' });
+      if (blog && blog.data) {
+        this.selectBlog(blog.data)
+        console.log('POST ID', this.post.uid)
+        await this.$router.push({ name: 'Blog Post', params: { id: this.post.uid } })
       }
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <section v-if="!loading" class="blog-post">
+  <section class="blog-post">
     <div class="blog-post__content">
       <div class="blog-post__heading">
         <h1 class="blog-post__heading__title primary--text">{{ title }}</h1>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import prismicDOM from 'prismic-dom'
 
 const Elements = prismicDOM.RichText.Elements
@@ -30,15 +31,11 @@ export default {
   name: 'Post',
   data () {
     return {
-      post: null,
-      loading: true,
       HTMLSerializer
     };
   },
   computed: {
-    blogID() {
-      return this.$route.params.id
-    },
+    ...mapGetters([ 'post' ]),
     title() {
       if (!this.post || !this.post.blog_title || !this.post.blog_title.length) {
         return ''
@@ -79,20 +76,6 @@ export default {
       }
       return this.post.blog_content
     }
-  },
-  methods: {
-    getContent () {
-      this.loading = true
-      this.$prismic.client.getByUID('blog_post', this.blogID, { fetchLinks: 'author.name' }).then((document) => {
-        if (document && document.data) {
-          this.post = document.data
-        }
-        this.loading = false
-      })
-    }
-  },
-  mounted () {
-    this.getContent();
   }
 }
 </script>

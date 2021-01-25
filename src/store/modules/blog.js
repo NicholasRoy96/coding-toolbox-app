@@ -1,10 +1,13 @@
 const state = {
   posts: [],
   categories: [],
-  selectedCategory: null
+  selectedCategory: null,
+  selectedBlog: null
 }
 
-const getters = {}
+const getters = {
+  post: state => state.selectedBlog
+}
 
 const actions = {
   async getPosts({ commit }) {
@@ -19,6 +22,9 @@ const actions = {
   },
   selectCategory({ commit }, category) {
     commit( 'setCategory', category )
+  },
+  selectBlog({ commit }, blog) {
+    commit( 'setBlog', blog )
   }
 }
 
@@ -31,6 +37,9 @@ const mutations = {
   },
   setCategory( state, category ) {
     state.selectedCategory = category
+  },
+  setBlog( state, blog ) {
+    state.selectedBlog = blog
   }
 }
 
