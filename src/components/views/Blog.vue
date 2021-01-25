@@ -158,7 +158,7 @@ export default {
       @media (min-width: 1024px) {
         width: 50%;
       }
-      @media (min-width: 1400px) {
+      @media (min-width: 1600px) {
         width: 33.33%;
       }
     }

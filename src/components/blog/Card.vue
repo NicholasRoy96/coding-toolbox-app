@@ -89,13 +89,17 @@ export default {
     &__title {
       text-align: start;
       letter-spacing: 0.5px;
-      flex-grow: 1;
       color: var(--c-white);
       font-family: var(--font-header);
       font-size: var(--font-lg);
       font-weight: bold;
       padding: 0 var(--spacer-sm);
       margin-bottom: var(--spacer-xs);
+      height: 72px;
+      // When using flex-grow, any additional space on other elements
+      // e.g. subtitle is also added to title height, so cannot get consistent
+      // height of title if other card content varies
+      // flex-grow: 1;
     }
     &__subtitle {
       text-align: start;
@@ -104,6 +108,7 @@ export default {
       font-size: var(--font-sm);
       margin-bottom: var(--spacer-base);
       padding: 0 var(--spacer-sm);
+      flex-grow: 1;
 
     }
     &__tags {
