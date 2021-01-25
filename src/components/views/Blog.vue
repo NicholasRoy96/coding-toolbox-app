@@ -13,12 +13,16 @@
           {{ description }}
         </p>
         <div class="blog__grid">
-          <BlogCard
+          <div
             v-for="(post, i) in blog.posts"
-            :key="i"
-            :post="post"
-            class="blog__grid__card"
-          />
+            :key="i" 
+            class="blog__grid__inner"
+          >
+            <BlogCard
+              :post="post"
+              class="blog__grid__card"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -38,12 +42,16 @@
             {{ description }}
           </div>
           <div class="blog__grid">
-            <BlogCard
+            <div 
               v-for="(post, i) in blog.posts"
-              :key="i"
-              :post="post"
-              class="blog__grid__card"
-            />
+              :key="i" 
+              class="blog__grid__inner"
+            >
+              <BlogCard
+                :post="post"
+                class="blog__grid__card"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -136,18 +144,23 @@ export default {
   &__grid {
     max-width: 1632px;
     margin: 0 auto;
-    padding: var(--spacer-xs);
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: var(--spacer-sm);
+    padding-bottom: var(--spacer-lg);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
     justify-content: space-between;
-    @media (min-width: 1024px) {
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: var(--spacer-lg);
-      padding-bottom: var(--spacer-lg);
-    }
-    @media (min-width: 1400px) {
-      grid-template-columns: repeat(3, 1fr);
+    &__inner {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      padding: var(--spacer-sm);
+      @media (min-width: 1024px) {
+        width: 50%;
+      }
+      @media (min-width: 1400px) {
+        width: 33.33%;
+      }
     }
   }
 }

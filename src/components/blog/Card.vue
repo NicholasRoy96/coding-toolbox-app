@@ -6,23 +6,24 @@
         {{ post.data.category }}
       </div>
     </div>
-    <div class="card__content">
-      <h3>
+      <h3 class="card__title">
         {{ post.data.blog_title[0].text }}
       </h3>
-      <p>
+      <p v-if="post.data.blog_subtitle.length" class="card__subtitle">
+        {{ post.data.blog_subtitle[0].text }}
+      </p>
+      <p v-else class="card__subtitle">
         Fetch and transitioning server-render data with Next.js to realtime Firestore data
       </p>
-      <div class="card__content__tags">
+      <div class="card__tags">
         <div
           v-for="(tag, i) in post.tags"
           :key="i"
-          class="card__content__tags--tag"
+          class="card__tags--tag"
         >
           #{{ tag }}
         </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -46,8 +47,11 @@ export default {
 
 <style scoped lang="scss">
   .card {
+    display: flex;
+    flex-direction: column;
     cursor: pointer;
     width: 100%;
+    background-color: var(--bg-grey);
     -webkit-transition: 0.5s all ease;
     -moz-transition: 0.5s all ease;
     -ms-transition: 0.5s all ease;
@@ -55,17 +59,14 @@ export default {
     &:hover {
       transform: scale(1.03);
       box-shadow: 6px 6px 4px var(--c-secondary);
-      .card {
-        &__content {
-          filter: brightness(120%);
-        }
-      }
+      filter: brightness(120%);
     }
     &__image-container {
       position: relative;
       width: 100%;
       height: 0;
       padding-bottom: 50%;
+      margin-bottom: var(--spacer-lg);
       img {
         display: block;
         position: absolute;
@@ -85,44 +86,37 @@ export default {
         font-weight: bold;
       }
     }
-    &__content {
-      -webkit-transition: 0.5s all ease;
-      -moz-transition: 0.5s all ease;
-      -ms-transition: 0.5s all ease;
-      transition: 0.5s all ease;
+    &__title {
       text-align: start;
-      background-color: var(--bg-grey);
-      padding: var(--spacer-lg) var(--spacer-sm);
       letter-spacing: 0.5px;
-      h3 {
+      flex-grow: 1;
+      color: var(--c-white);
+      font-family: var(--font-header);
+      font-size: var(--font-lg);
+      font-weight: bold;
+      padding: 0 var(--spacer-sm);
+      margin-bottom: var(--spacer-xs);
+    }
+    &__subtitle {
+      text-align: start;
+      color: var(--c-secondary);
+      font-family: var(--font-primary);
+      font-size: var(--font-sm);
+      margin-bottom: var(--spacer-base);
+      padding: 0 var(--spacer-sm);
+
+    }
+    &__tags {
+      display: flex;
+      padding: 0 var(--spacer-sm) var(--spacer-lg);
+      &--tag {
+        background-color: var(--c-darkblue);
         color: var(--c-white);
-        font-family: var(--font-header);
-        font-size: var(--font-lg);
-        font-weight: bold;
-        margin-bottom: var(--spacer-xs);
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-        height: 72px;
-      }
-      p {
-        color: var(--c-secondary);
-        font-family: var(--font-primary);
-        font-size: var(--font-sm);
-        margin-bottom: var(--spacer-base);
-      }
-      &__tags {
-        display: flex;
-        &--tag {
-          background-color: var(--c-darkblue);
-          color: var(--c-white);
-          font-size: var(--font-xs);
-          font-weight: 600;
-          padding: var(--spacer-xxs) var(--spacer-xs);
-          &:not(:last-child) {
-            margin-right: var(--spacer-xxs);
-          }
+        font-size: var(--font-xs);
+        font-weight: 600;
+        padding: var(--spacer-xxs) var(--spacer-xs);
+        &:not(:last-child) {
+          margin-right: var(--spacer-xxs);
         }
       }
     }
