@@ -55,11 +55,11 @@ export default {
     
     },
     async viewBlog() {
-      const blog = await this.$prismic.client.getByUID('blog_post', this.post.uid, { fetchLinks: 'author.name' });
+      const { uid } = this.post
+      const blog = await this.$prismic.client.getByUID('blog_post', uid, { fetchLinks: 'author.name' })
       if (blog && blog.data) {
-        this.selectBlog(blog.data)
-        console.log('POST ID', this.post.uid)
-        await this.$router.push({ name: 'Blog Post', params: { id: this.post.uid } })
+        this.selectBlog({ uid, ...blog.data })
+        await this.$router.push({ name: 'Blog Post', params: { id: uid } })
       }
     }
   }

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import prismicDOM from 'prismic-dom'
 
 const Elements = prismicDOM.RichText.Elements
@@ -76,6 +76,20 @@ export default {
       }
       return this.post.blog_content
     }
+  },
+  methods: {
+    ...mapActions([ 'selectBlog' ])
+  },
+  beforeRouteEnter (to, from, next) {
+    next(async(vm) => {
+      const blogID = to.params ? to.params.id : null
+      const { post } = vm;
+      if (blogID && blogID !== post.uid) {
+        const blog = await vm.$prismic.client.getByUID('blog_post', blogID, { fetchLinks: 'author.name' })
+        vm.selectBlog({ uid: blogID, ...blog.data })
+      }
+      next();
+    })
   }
 }
 </script>
