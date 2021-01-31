@@ -41,7 +41,13 @@
           <div class="categories">
             <h3>Categories</h3>
             <ul>
-              <li @click="switchCategory(category)" v-for="category in blog.allCategories" :key="category">
+              <li
+                class="categories__option"
+                :class="{ 'active': isActiveCategory(category) }"
+                v-for="category in blog.allCategories"
+                :key="category"
+                @click="switchCategory(category)"
+              >
                 {{ category }}
               </li>
             </ul>
@@ -99,6 +105,9 @@ export default {
   },
   methods: {
     ...mapActions([ 'selectCategory', 'selectTags', 'filterPosts' ]),
+    isActiveCategory (filterCategory) {
+      return this.blog.selectedCategory === filterCategory
+    },
     isActiveTag (filterTag) {
       return this.blog.selectedTags.includes(filterTag)
     },
@@ -180,7 +189,15 @@ export default {
       margin: var(--spacer-sm) 0;
     }
     .categories {
-      cursor: pointer;
+      &__option {
+        cursor: pointer;
+        &.active {
+          color: red;
+          font-size: 50px;
+          font-weight: bold;
+          text-decoration: wavy;
+        }
+      }
     }
     .tags {
       &__container {
