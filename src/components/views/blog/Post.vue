@@ -88,6 +88,7 @@ export default {
         const blog = await vm.$prismic.client.getByUID('blog_post', blogID, { fetchLinks: 'author.name' })
         vm.selectBlog({ uid: blogID, ...blog.data })
       }
+      window.scrollTo(0, 0);
       next();
     })
   }

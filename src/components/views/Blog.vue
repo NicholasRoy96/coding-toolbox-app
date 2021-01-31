@@ -14,7 +14,7 @@
         </p>
         <div class="blog__grid">
           <div
-            v-for="(post, i) in blog.posts"
+            v-for="(post, i) in blog.filteredPosts"
             :key="i" 
             class="blog__grid__inner"
           >
@@ -29,29 +29,48 @@
 
     <!-- Desktop Only -->
     <div class="hidden lg:block">
-      <div class="blog__banner hidden lg:flex">
+      <div class="blog__banner flex">
         <div class="blog__banner__content">
           <h1 class="pb-2">Blog</h1>
           <img class="pb-8" src="@/assets/icons/Line_White.svg" />
           <h2>{{ category }}</h2>
         </div>
       </div>
-      <div class="px-16 pb-16">
-        <div class="blog__container px-16 -mt-16 z-10">
-          <div class="blog__description">
-            {{ description }}
+      <div class="blog__container flex">
+        <div class="blog__filters">
+          <div class="categories">
+            <h3>Categories</h3>
+            <ul>
+              <li @click="switchCategory(category)" v-for="category in blog.allCategories" :key="category">
+                {{ category }}
+              </li>
+            </ul>
           </div>
-          <div class="blog__grid">
-            <div 
-              v-for="(post, i) in blog.posts"
-              :key="i" 
-              class="blog__grid__inner"
-            >
-              <BlogCard
-                :post="post"
-                class="blog__grid__card"
-              />
+          <div class="tags">
+            <h3>Tags</h3>
+            <div class="tags__container">
+              <div
+                class="tags__tag"
+                :class="{ 'active': isActiveTag(tag) }"
+                v-for="tag in blog.allTags"
+                :key="tag"
+                @click="toggleTag(tag)"
+              >
+                #{{ tag }}
+              </div>
             </div>
+          </div>
+        </div>
+        <div class="blog__grid">
+          <div 
+            v-for="(post, i) in blog.filteredPosts"
+            :key="i" 
+            class="blog__grid__inner"
+          >
+            <BlogCard
+              :post="post"
+              class="blog__grid__card"
+            />
           </div>
         </div>
       </div>
@@ -62,7 +81,7 @@
 
 <script>
 import BlogCard from '@/components/blog/Card.vue'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Blog',
@@ -71,11 +90,26 @@ export default {
   },
   computed: {
     ...mapState([ 'blog' ]),
-    category() {
+    category () {
       return this.blog.selectedCategory || 'ALL'
     },
-    description() {
+    description () {
       return 'Welcome to The Coding Toolbox. Read articles on Web Development tips and tricks, career advice and useful tools which you can use to make your life easier'
+    }
+  },
+  methods: {
+    ...mapActions([ 'selectCategory', 'selectTags', 'filterPosts' ]),
+    isActiveTag (filterTag) {
+      return this.blog.selectedTags.includes(filterTag)
+    },
+    switchCategory (filterCategory) {
+      if (this.blog.selectedCategory === filterCategory) return
+      this.selectCategory(filterCategory)
+      this.filterPosts()
+    },
+    toggleTag (filterTag) {
+      this.selectTags(filterTag)
+      this.filterPosts()
     }
   }
 }
@@ -98,10 +132,7 @@ export default {
     }
   }
   &__container {
-    position: relative;
-    box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    background: white;
+    padding: var(--spacer-sm) var(--spacer-lg);
   }
   &__banner {
     width: 100%;
@@ -141,14 +172,56 @@ export default {
       padding: var(--spacer-2xl) 0;
     }
   }
+  &__filters {
+    width: 20%;
+    h3 {
+      font-size: var(--font-base);
+      font-weight: 600;
+      margin: var(--spacer-sm) 0;
+    }
+    .categories {
+      cursor: pointer;
+    }
+    .tags {
+      &__container {
+        display: flex;
+        max-width: 100%;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      &__tag {
+        cursor: pointer;
+        background-color: transparent;
+        color: var(--c-secondary);
+        font-size: var(--font-sm);
+        font-weight: 400;
+        padding: var(--spacer-xxs) var(--spacer-xs);
+        margin-right: var(--spacer-xs);
+        margin-bottom: var(--spacer-xs);
+        border-radius: 3px;
+        border: 1px solid var(--c-lightgrey);
+        -webkit-transition: 0.5s all ease;
+        -moz-transition: 0.5s all ease;
+        -ms-transition: 0.5s all ease;
+        transition: 0.5s all ease;
+        &:hover {
+          border-color: var(--c-secondary);
+        }
+        &.active {
+          background-color: var(--c-darkblue);
+          color: var(--c-white);
+        }
+      }
+    }
+  }
   &__grid {
-    max-width: 1632px;
     margin: 0 auto;
     padding-bottom: var(--spacer-lg);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100%;
+    width: 80%;
     justify-content: space-between;
     &__inner {
       display: flex;
@@ -158,9 +231,9 @@ export default {
       @media (min-width: 1024px) {
         width: 50%;
       }
-      @media (min-width: 1600px) {
-        width: 33.33%;
-      }
+      // @media (min-width: 1600px) {
+      //   width: 33.33%;
+      // }
     }
   }
 }

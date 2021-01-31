@@ -55,11 +55,10 @@ export default {
     
     },
     async viewBlog() {
-      const { uid } = this.post
-      const blog = await this.$prismic.client.getByUID('blog_post', uid, { fetchLinks: 'author.name' })
+      const blog = await this.$prismic.client.getByUID('blog_post', this.post.uid, { fetchLinks: 'author.name' });
       if (blog && blog.data) {
-        this.selectBlog({ uid, ...blog.data })
-        await this.$router.push({ name: 'Blog Post', params: { id: uid } })
+        this.selectBlog(blog.data)
+        await this.$router.push({ name: 'Blog Post', params: { id: this.post.uid } })
       }
     }
   }
@@ -138,7 +137,7 @@ export default {
       &--tag {
         background-color: var(--c-darkblue);
         color: var(--c-white);
-        font-size: var(--font-xs);
+        font-size: var(--font-sm);
         font-weight: 600;
         padding: var(--spacer-xxs) var(--spacer-xs);
         &:not(:last-child) {
