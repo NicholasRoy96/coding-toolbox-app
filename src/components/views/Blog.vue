@@ -5,7 +5,7 @@
     <div class="lg:hidden">
       <div class="blog__headings lg:hidden pt-8">
         <h1 class="pb-2">Blog</h1>
-        <h2 class="pb-2">{{ category }}</h2>
+        <h2 class="pb-2">Check out our awesome blogs below</h2>
         <img class="mx-auto" src="@/assets/icons/Line.svg" width="10%" />
       </div>
       <div class="pb-16">
@@ -33,36 +33,36 @@
         <div class="blog__banner__content">
           <h1 class="pb-2">Blog</h1>
           <img class="pb-8" src="@/assets/icons/Line_White.svg" />
-          <h2>{{ category }}</h2>
+          <h2>Check out our awesome blogs below</h2>
         </div>
       </div>
       <div class="blog__container flex">
         <div class="blog__filters">
           <div class="categories">
-            <h3>Categories</h3>
-            <ul>
-              <li
-                class="categories__option"
+            <h3>Category</h3>
+            <div class="tech__container">
+              <div
+                class="tech__tech"
                 :class="{ 'active': isActiveCategory(category) }"
                 v-for="category in blog.allCategories"
                 :key="category"
-                @click="switchCategory(category)"
+                @click="toggleCategory(category)"
               >
                 {{ category }}
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
-          <div class="tags">
-            <h3>Tags</h3>
-            <div class="tags__container">
+          <div class="tech">
+            <h3>Tech Stack</h3>  
+            <div class="tech__container">
               <div
-                class="tags__tag"
-                :class="{ 'active': isActiveTag(tag) }"
-                v-for="tag in blog.allTags"
-                :key="tag"
-                @click="toggleTag(tag)"
+                class="tech__tech"
+                :class="{ 'active': isActiveTech(tech) }"
+                v-for="tech in blog.allTech"
+                :key="tech"
+                @click="toggleTech(tech)"
               >
-                #{{ tag }}
+                {{ tech }}
               </div>
             </div>
           </div>
@@ -96,28 +96,24 @@ export default {
   },
   computed: {
     ...mapState([ 'blog' ]),
-    category () {
-      return this.blog.selectedCategory || 'ALL'
-    },
     description () {
       return 'Welcome to The Coding Toolbox. Read articles on Web Development tips and tricks, career advice and useful tools which you can use to make your life easier'
     }
   },
   methods: {
-    ...mapActions([ 'selectCategory', 'selectTags', 'filterPosts' ]),
+    ...mapActions([ 'selectCategory', 'selectTech', 'filterPosts' ]),
     isActiveCategory (filterCategory) {
-      return this.blog.selectedCategory === filterCategory
+      return this.blog.selectedCategories.includes(filterCategory)
     },
-    isActiveTag (filterTag) {
-      return this.blog.selectedTags.includes(filterTag)
+    isActiveTech (filterTech) {
+      return this.blog.selectedTech.includes(filterTech)
     },
-    switchCategory (filterCategory) {
-      if (this.blog.selectedCategory === filterCategory) return
+    toggleCategory (filterCategory) {
       this.selectCategory(filterCategory)
       this.filterPosts()
     },
-    toggleTag (filterTag) {
-      this.selectTags(filterTag)
+    toggleTech (filterTech) {
+      this.selectTech(filterTech)
       this.filterPosts()
     }
   }
@@ -199,7 +195,7 @@ export default {
         }
       }
     }
-    .tags {
+    .tech {
       &__container {
         display: flex;
         max-width: 100%;
@@ -207,7 +203,7 @@ export default {
         flex-wrap: wrap;
         justify-content: center;
       }
-      &__tag {
+      &__tech {
         cursor: pointer;
         background-color: transparent;
         color: var(--c-secondary);

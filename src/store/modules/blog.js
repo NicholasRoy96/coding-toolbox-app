@@ -2,9 +2,9 @@ const state = {
   posts: [],
   filteredPosts: [],
   allCategories: [],
-  allTags: [],
-  selectedCategory: null,
-  selectedTags: [],
+  allTech: [],
+  selectedCategories: [],
+  selectedTech: [],
   selectedBlog: null
 }
 
@@ -13,16 +13,15 @@ const getters = {
 }
 
 const actions = {
-  async getPosts({ commit }) {
+  async getPosts({ commit, dispatch, state }) {
     try {
       const response = await this._vm.$prismic.client.query('')
       commit( 'setPosts', response.results )
-      const categories = [ ...new Set(response.results.map(result => result.data.category )) ]
-      commit( 'setCategories', categories)
-      let tagsArr = []
-      response.results.forEach(result => tagsArr.push(...result.tags))
-      const tags = [ ...new Set(tagsArr) ]
-      commit( 'setTags', tags)
+      const allCategories = [ ...new Set([].concat(...response.results.map(result => Object.keys(result.data.filter_category[0])) )) ]
+      commit( 'setCategories', allCategories)
+      const allTech = [ ...new Set([].concat(...response.results.map(result => Object.keys(result.data.filter_tech[0])) )) ]
+      commit( 'setTech', allTech)
+      dispatch( 'filterPosts', state.posts )
     } catch (e) {
       // suppress error
     }
@@ -30,33 +29,48 @@ const actions = {
   filterPosts({ state, commit }) {
     let posts = state.posts
     // Filter by category
-    if (state.selectedCategory) {
+    if (state.selectedCategories.length) {
       posts = posts.filter(post => {
-        return post.data.category === state.selectedCategory
+        const filterCategory = post.data.filter_category[0]
+        if (!filterCategory || !Object.keys(filterCategory).length) return
+        const activeCategories = Object.keys(filterCategory).filter(key => filterCategory[key])
+        return state.selectedCategories.some(tech => activeCategories.includes(tech))
       })
     }
-    // Filter by tag
-    if (state.selectedTags.length) {
+    // Filter by tech
+    if (state.selectedTech.length) {
       posts = posts.filter(post => {
-        return state.selectedTags.some(tag => post.tags.includes(tag))
+        const filterTech = post.data.filter_tech[0]
+        if (!filterTech || !Object.keys(filterTech).length) return
+        const activeTech = Object.keys(filterTech).filter(key => filterTech[key])
+        return state.selectedTech.some(tech => activeTech.includes(tech))
       })
     }
     commit( 'setFilteredPosts', posts )
   },
-  selectCategory({ commit }, category) {
-    commit( 'setFilterCategory', category )
-  },
-  selectTags({ state, commit }, filterTag) {
-    let newTags = state.selectedTags
-    if (state.selectedTags.includes(filterTag)) {
-      newTags = state.selectedTags.filter(tag => {
-        return tag !== filterTag
+  selectCategory({ commit }, filterCategory) {
+    let newCategories = state.selectedCategories
+    if (state.selectedCategories.includes(filterCategory)) {
+      newCategories = state.selectedCategories.filter(category => {
+        return category !== filterCategory
       })
     }
     else {
-      newTags.push(filterTag)
+      newCategories.push(filterCategory)
     }
-    commit( 'setFilterTags', newTags )
+    commit( 'setFilterCategory', newCategories )
+  },
+  selectTech({ state, commit }, filterTech) {
+    let newTech = state.selectedTech
+    if (state.selectedTech.includes(filterTech)) {
+      newTech = state.selectedTech.filter(tech => {
+        return tech !== filterTech
+      })
+    }
+    else {
+      newTech.push(filterTech)
+    }
+    commit( 'setFilterTech', newTech )
   },
   selectBlog({ commit }, blog) {
     commit( 'setBlog', blog )
@@ -73,14 +87,14 @@ const mutations = {
   setCategories( state, categories ) {
     state.allCategories = categories
   },
-  setTags( state, tags ) {
-    state.allTags = tags
+  setTech( state, tech ) {
+    state.allTech = tech
   },
-  setFilterCategory( state, category ) {
-    state.selectedCategory = category
+  setFilterCategory( state, categories ) {
+    state.selectedCategories = categories
   },
-  setFilterTags( state, tags ) {
-    state.selectedTags = tags
+  setFilterTech( state, tech ) {
+    state.selectedTech = tech
   },
   setBlog( state, blog ) {
     state.selectedBlog = blog
