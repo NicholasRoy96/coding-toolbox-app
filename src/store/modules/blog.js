@@ -29,8 +29,9 @@ const actions = {
   filterPosts({ state, commit }) {
     let posts = state.posts
     // Filter by category
+    let filteredCategoryPosts = posts
     if (state.selectedCategories.length) {
-      posts = posts.filter(post => {
+      filteredCategoryPosts = posts.filter(post => {
         const filterCategory = post.data.filter_category[0]
         if (!filterCategory || !Object.keys(filterCategory).length) return
         const activeCategories = Object.keys(filterCategory).filter(key => filterCategory[key])
@@ -38,15 +39,36 @@ const actions = {
       })
     }
     // Filter by tech
+    let filteredTechPosts = posts
     if (state.selectedTech.length) {
-      posts = posts.filter(post => {
+      filteredTechPosts = posts.filter(post => {
         const filterTech = post.data.filter_tech[0]
         if (!filterTech || !Object.keys(filterTech).length) return
         const activeTech = Object.keys(filterTech).filter(key => filterTech[key])
         return state.selectedTech.some(tech => activeTech.includes(tech))
       })
     }
-    commit( 'setFilteredPosts', posts )
+
+    // No filters selected
+    if (!state.selectedCategories.length && !state.selectedTech.length) {
+      return commit( 'setFilteredPosts', posts )
+    }
+
+    // Only category filters selected
+    if (state.selectedCategories.length && !state.selectedTech.length) {
+      return commit( 'setFilteredPosts', filteredCategoryPosts )
+    }
+
+    // Only tech filters selected
+    if (!state.selectedCategories.length && state.selectedTech.length) {
+      return commit( 'setFilteredPosts', filteredTechPosts )
+    }
+
+    // Both filters selected
+    if (state.selectedCategories.length && state.selectedTech.length) {
+      const filteredPosts = [ ...new Set([...filteredCategoryPosts,...filteredTechPosts]) ]
+      return commit( 'setFilteredPosts', filteredPosts )
+    }
   },
   selectCategory({ commit }, filterCategory) {
     let newCategories = state.selectedCategories
