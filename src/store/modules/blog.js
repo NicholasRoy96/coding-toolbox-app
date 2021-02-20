@@ -15,7 +15,9 @@ const getters = {
 const actions = {
   async getPosts({ commit, dispatch, state }) {
     try {
-      const response = await this._vm.$prismic.client.query('')
+      const response = await this._vm.$prismic.client.query(
+        this._vm.$prismic.Predicates.at('document.type', 'blog_post')
+      )
       commit( 'setPosts', response.results )
       const allCategories = [ ...new Set([].concat(...response.results.map(result => Object.keys(result.data.filter_category[0])) )) ]
       commit( 'setCategories', allCategories)

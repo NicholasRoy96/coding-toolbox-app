@@ -3,7 +3,7 @@
     <div class="blog-post__content">
       <div class="blog-post__heading">
         <h1 class="blog-post__heading__title primary--text">{{ title }}</h1>
-        <h2 class="blog-post__heading__subtitle">By {{ author }} | {{ date | formatDate }}</h2>
+        <router-link class="blog-post__heading__subtitle" :to="{ name: 'Author', params: { name: authorSlug } }">By {{ author }} | {{ date | formatDate }}</router-link>
         <h3 class="blog-post__heading__subtitle">{{ category }}</h3>
       </div>
       <prismic-rich-text :field="content" :htmlSerializer="HTMLSerializer" class="blog-post__text" />
@@ -43,10 +43,16 @@ export default {
       return this.post.blog_title[0].text
     },
     author() {
-      if (!this.post || !this.post.author || !this.post.author.length) {
+      if (!this.post || !this.post.author || !this.post.author.data || !this.post.author.data.name) {
         return ''
       }
-      return this.post.author[0].text
+      return this.post.author.data.name[0].text
+    },
+    authorSlug() {
+      if (!this.post || !this.post.author || !this.post.author.uid || !this.post.author.slug) {
+        return ''
+      }
+      return this.post.author.slug
     },
     category() {
       if (!this.post || !this.post.category) {

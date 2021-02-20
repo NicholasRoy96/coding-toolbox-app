@@ -3,7 +3,8 @@ import Router from 'vue-router'
 
 // Base Pages
 // import Home from '../components/views/Home.vue'
-// import About from '../components/views/About.vue'
+import About from '../components/views/About.vue'
+import Author from '../components/views/Author.vue'
 // import Contact from '../components/views/Contact.vue'
 
 // Blog Specific
@@ -15,16 +16,16 @@ const routes = [{
   name: 'Home',
   component: Blog
 },
-// {
-//   path: '/about',
-//   name: 'About',
-//   component: About
-// },
-// {
-//   path: '/contact',
-//   name: 'Contact',
-//   component: Contact
-// },
+{
+  path: '/about',
+  name: 'About',
+  component: About
+},
+{
+  path: '/author/:name',
+  name: 'Author',
+  component: Author
+},
 {
   name: 'Blog',
   path: '/blog',
