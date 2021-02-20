@@ -240,7 +240,7 @@ export default {
       display: flex;
       flex-direction: row;
       width: 100%;
-      padding: var(--spacer-sm);
+      padding: var(--spacer-lg);
       @media (min-width: 1024px) {
         width: 50%;
       }

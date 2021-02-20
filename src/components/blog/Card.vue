@@ -1,29 +1,22 @@
 <template>
   <div class="card" @click='viewBlog'>
-    <div class="card__image-container">
+    <div class="card__image-container mb-4">
       <img :src="post.data.thumbnail.url" />
-      <div class="card__image-container__category" :style="`background-color: ${categoryColours[post.data.category]}`">
-        {{ post.data.category }}
-      </div>
     </div>
-      <h3 class="card__title">
+    <div class="px-8">
+      <h3 class="card__title mb-2">
         {{ post.data.blog_title[0].text }}
       </h3>
-      <p v-if="post.data.blog_subtitle.length" class="card__subtitle">
+      <h4 class="card__category mb-4">
+        {{ category }}
+      </h4>
+      <p v-if="post.data.blog_subtitle.length" class="card__description">
         {{ post.data.blog_subtitle[0].text }}
       </p>
-      <p v-else class="card__subtitle">
+      <p v-else class="card__description">
         Fetch and transitioning server-render data with Next.js to realtime Firestore data
       </p>
-      <div class="card__tags">
-        <div
-          v-for="(tag, i) in post.tags"
-          :key="i"
-          class="card__tags--tag"
-        >
-          #{{ tag }}
-        </div>
-      </div>
+    </div>
   </div>
 </template>
 
@@ -41,12 +34,9 @@ export default {
     }
   },
   computed: {
-    categoryColours () {
-      return {
-        'Career': 'var(--c-darkblue)',
-        'Code': 'var(--c-lightorange)',
-        'Tools': 'var(--c-bluegreen)'
-      }
+    category () {
+      const categories = Object.entries(this.post.data.filter_category[0])
+      return categories.filter(cat => cat[1] === true).pop()[0]
     }
   },
   methods: {
@@ -71,22 +61,21 @@ export default {
     flex-direction: column;
     cursor: pointer;
     width: 100%;
-    background-color: var(--bg-grey);
+    background-color: var(--offwhite);
     -webkit-transition: 0.5s all ease;
     -moz-transition: 0.5s all ease;
     -ms-transition: 0.5s all ease;
     transition: 0.5s all ease;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
     &:hover {
       transform: scale(1.03);
-      box-shadow: 6px 6px 4px var(--c-secondary);
-      filter: brightness(120%);
     }
     &__image-container {
       position: relative;
       width: 100%;
       height: 0;
-      padding-bottom: 50%;
-      margin-bottom: var(--spacer-lg);
+      padding-bottom: 45%;
       img {
         display: block;
         position: absolute;
@@ -95,55 +84,32 @@ export default {
         width: 100%;
         height: 100%;
         object-fit: cover;
-      }
-      &__category {
-        position: absolute;
-        top: var(--spacer-base);
-        left: var(--spacer-base);
-        color: white;
-        border-radius: 16px;
-        padding: var(--spacer-xxs) var(--spacer-sm);
-        font-weight: bold;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
       }
     }
     &__title {
       text-align: start;
-      letter-spacing: 0.5px;
-      color: var(--c-white);
+      color: var(--c-primary);
       font-family: var(--font-header);
       font-size: var(--font-lg);
       font-weight: bold;
-      padding: 0 var(--spacer-sm);
-      margin-bottom: var(--spacer-xs);
-      height: 72px;
-      // When using flex-grow, any additional space on other elements
-      // e.g. subtitle is also added to title height, so cannot get consistent
-      // height of title if other card content varies
-      // flex-grow: 1;
+      // height: 72px;
     }
-    &__subtitle {
+    &__category {
+      text-align: start;
+      color: var(--c-orange);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    &__description {
       text-align: start;
       color: var(--c-secondary);
       font-family: var(--font-primary);
       font-size: var(--font-sm);
       margin-bottom: var(--spacer-base);
-      padding: 0 var(--spacer-sm);
       flex-grow: 1;
-
-    }
-    &__tags {
-      display: flex;
-      padding: 0 var(--spacer-sm) var(--spacer-lg);
-      &--tag {
-        background-color: var(--c-darkblue);
-        color: var(--c-white);
-        font-size: var(--font-sm);
-        font-weight: 600;
-        padding: var(--spacer-xxs) var(--spacer-xs);
-        &:not(:last-child) {
-          margin-right: var(--spacer-xxs);
-        }
-      }
     }
   }
 </style>
