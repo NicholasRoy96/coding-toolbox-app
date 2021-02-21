@@ -100,13 +100,14 @@ export default {
       text-align: start;
       color: var(--c-orange);
       font-weight: bold;
+      font-family: var(--font-family-primary);
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
     &__description {
       text-align: start;
       color: var(--c-secondary);
-      font-family: var(--font-primary);
+      font-family: var(--font-secondary);
       font-size: var(--font-sm);
       margin-bottom: var(--spacer-base);
       flex-grow: 1;
