@@ -15,7 +15,8 @@
   --c-accent: #87BBA2;
   --c-white: #FFFFFF;
   --c-offwhite: #FAFAFA;
-  --c-lightgrey: #D8D8D8;
+  --c-lightgrey: #B0B0B0;
+  --c-darkgrey: #3D3D3D;
   --c-darkblue: #264653;
   --c-bluegreen: #2a9d8f;
   --c-yellow: #e9c46a;
@@ -42,7 +43,9 @@
 
   --font-xxs: 8px;
   --font-xs: 12px;
+  --font-tiny: 14px;
   --font-sm: 16px;
+  --font-m: 18px;
   --font-base: 20px;
   --font-lg: 24px;
   --font-xl: 28px;

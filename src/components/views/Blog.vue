@@ -32,41 +32,14 @@
       <div class="blog__banner flex">
         <div class="blog__banner__content">
           <h1 class="pb-2">Blog</h1>
-          <img class="pb-8" src="@/assets/icons/Line_White.svg" />
+          <img class="pb-8 w-1/4 mx-auto" src="@/assets/icons/Line_White.svg" />
           <h2>Check out our awesome blogs below</h2>
         </div>
       </div>
       <div class="blog__container flex">
-        <div class="blog__filters">
-          <div class="categories">
-            <h3>Category</h3>
-            <div class="tech__container">
-              <div
-                class="tech__tech"
-                :class="{ 'active': isActiveCategory(category) }"
-                v-for="category in blog.allCategories"
-                :key="category"
-                @click="toggleCategory(category)"
-              >
-                {{ category }}
-              </div>
-            </div>
-          </div>
-          <div class="tech">
-            <h3>Tech Stack</h3>  
-            <div class="tech__container">
-              <div
-                class="tech__tech"
-                :class="{ 'active': isActiveTech(tech) }"
-                v-for="tech in blog.allTech"
-                :key="tech"
-                @click="toggleTech(tech)"
-              >
-                {{ tech }}
-              </div>
-            </div>
-          </div>
-        </div>
+
+        <BlogFilters class="mx-auto z-50 -mt-24"/>
+
         <div class="blog__grid">
           <div 
             v-for="(post, i) in blog.filteredPosts"
@@ -87,34 +60,19 @@
 
 <script>
 import BlogCard from '@/components/blog/Card.vue'
-import { mapState, mapActions } from 'vuex'
+import BlogFilters from '@/components/blog/Filters.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Blog',
   components: {
-    BlogCard
+    BlogCard,
+    BlogFilters
   },
   computed: {
     ...mapState([ 'blog' ]),
     description () {
       return 'Welcome to The Coding Toolbox. Read articles on Web Development tips and tricks, career advice and useful tools which you can use to make your life easier'
-    }
-  },
-  methods: {
-    ...mapActions([ 'selectCategory', 'selectTech', 'filterPosts' ]),
-    isActiveCategory (filterCategory) {
-      return this.blog.selectedCategories.includes(filterCategory)
-    },
-    isActiveTech (filterTech) {
-      return this.blog.selectedTech.includes(filterTech)
-    },
-    toggleCategory (filterCategory) {
-      this.selectCategory(filterCategory)
-      this.filterPosts()
-    },
-    toggleTech (filterTech) {
-      this.selectTech(filterTech)
-      this.filterPosts()
     }
   }
 }
@@ -138,10 +96,13 @@ export default {
   }
   &__container {
     padding: var(--spacer-sm) var(--spacer-lg);
+    @media (min-width: 1600px) {
+      padding: var(--spacer-sm) var(--spacer-xl);
+    }
   }
   &__banner {
     width: 100%;
-    background-image: url("../../assets/reviews.jpg");
+    background-image: linear-gradient(178deg, transparent 84.8%, white 85%), url("../../assets/reviews.jpg");
     padding-bottom: 37%;
     background-position: 50% 50%;
     position: relative;
@@ -177,65 +138,17 @@ export default {
       padding: var(--spacer-2xl) 0;
     }
   }
-  &__filters {
-    width: 20%;
-    h3 {
-      font-size: var(--font-base);
-      font-weight: 600;
-      margin: var(--spacer-sm) 0;
-    }
-    .categories {
-      &__option {
-        cursor: pointer;
-        &.active {
-          color: red;
-          font-size: 50px;
-          font-weight: bold;
-          text-decoration: wavy;
-        }
-      }
-    }
-    .tech {
-      &__container {
-        display: flex;
-        max-width: 100%;
-        margin: 0 auto;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      &__tech {
-        cursor: pointer;
-        background-color: transparent;
-        color: var(--c-secondary);
-        font-size: var(--font-sm);
-        font-weight: 400;
-        padding: var(--spacer-xxs) var(--spacer-xs);
-        margin-right: var(--spacer-xs);
-        margin-bottom: var(--spacer-xs);
-        border-radius: 3px;
-        border: 1px solid var(--c-lightgrey);
-        -webkit-transition: 0.5s all ease;
-        -moz-transition: 0.5s all ease;
-        -ms-transition: 0.5s all ease;
-        transition: 0.5s all ease;
-        &:hover {
-          border-color: var(--c-secondary);
-        }
-        &.active {
-          background-color: var(--c-darkblue);
-          color: var(--c-white);
-        }
-      }
-    }
-  }
   &__grid {
     margin: 0 auto;
     padding-bottom: var(--spacer-lg);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 80%;
+    width: 100%;
     justify-content: space-between;
+    @media (min-width: 1024px) {
+      width: 80%;
+    }
     &__inner {
       display: flex;
       flex-direction: row;

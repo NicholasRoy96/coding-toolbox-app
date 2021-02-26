@@ -3,8 +3,8 @@
     <div class="card__image-container mb-4">
       <img :src="post.data.thumbnail.url" />
     </div>
-    <div class="px-8">
-      <h3 class="card__title mb-2">
+    <div class="px-8 flex flex-col">
+      <h3 class="card__title mb-1">
         {{ post.data.blog_title[0].text }}
       </h3>
       <h4 class="card__category mb-4">
@@ -57,8 +57,6 @@ export default {
 
 <style scoped lang="scss">
   .card {
-    display: flex;
-    flex-direction: column;
     cursor: pointer;
     width: 100%;
     background-color: var(--offwhite);
@@ -92,25 +90,25 @@ export default {
       text-align: start;
       color: var(--c-primary);
       font-family: var(--font-header);
-      font-size: var(--font-lg);
+      font-size: var(--font-xl);
       font-weight: bold;
-      // height: 72px;
+      line-height: 1.3;
     }
     &__category {
       text-align: start;
       color: var(--c-orange);
       font-weight: bold;
       font-family: var(--font-family-primary);
+      font-size: var(--font-m);
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
     &__description {
       text-align: start;
-      color: var(--c-secondary);
+      color: var(--c-lightgrey);
       font-family: var(--font-secondary);
       font-size: var(--font-sm);
       margin-bottom: var(--spacer-base);
-      flex-grow: 1;
     }
   }
 </style>
