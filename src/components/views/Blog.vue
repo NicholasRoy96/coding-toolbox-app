@@ -6,9 +6,9 @@
       <div class="blog__headings lg:hidden pt-8">
         <h1 class="pb-2">Blog</h1>
         <h2 class="pb-2">Check out our awesome blogs below</h2>
-        <img class="mx-auto" src="@/assets/icons/Line.svg" width="10%" />
+        <img class="mx-auto" src="@/assets/icons/line.svg" width="10%" />
       </div>
-      <div class="pb-16">
+      <div class="pb-4 sm:pb-16">
         <p class="blog__description">
           {{ description }}
         </p>
@@ -32,7 +32,7 @@
       <div class="blog__banner flex">
         <div class="blog__banner__content">
           <h1 class="pb-2">Blog</h1>
-          <img class="pb-8 w-1/4 mx-auto" src="@/assets/icons/Line_White.svg" />
+          <img class="pb-8 w-1/4 mx-auto" src="@/assets/icons/line_orange.svg" />
           <h2>Check out our awesome blogs below</h2>
         </div>
       </div>
@@ -153,13 +153,13 @@ export default {
       display: flex;
       flex-direction: row;
       width: 100%;
-      padding: var(--spacer-lg);
+      padding: var(--spacer-sm);
+      @media (min-width: 768px) {
+        padding: var(--spacer-lg);
+      }
       @media (min-width: 1024px) {
         width: 50%;
       }
-      // @media (min-width: 1600px) {
-      //   width: 33.33%;
-      // }
     }
   }
 }

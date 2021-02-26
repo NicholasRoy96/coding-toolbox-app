@@ -108,6 +108,14 @@ export default {
       }
     }
     .item {
+      -o-transition: all 100ms ease-in-out;
+      -webkit-transition: all 100ms ease-in-out;
+      -moz-transition: all 100ms ease-in-out;
+      -ms-transition: all 100ms ease-in-out;
+      transition: all 100ms ease-in-out;
+      &:hover {
+        filter: brightness(1.2);
+      }
       &:not(:last-of-type) {
         margin-bottom: var(--spacer-sm);
       }

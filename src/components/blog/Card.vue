@@ -3,6 +3,14 @@
     <div class="card__image-container mb-4">
       <img :src="post.data.thumbnail.url" />
     </div>
+    <div v-if="techLogos && techLogos.length" class="card__logo-container">
+      <img
+        v-for="(logo, i) in techLogos"
+        :key="i"
+        :src="logo"
+        class="card__logo-container__logo"
+      />
+    </div>
     <div class="px-8 flex flex-col">
       <h3 class="card__title mb-1">
         {{ post.data.blog_title[0].text }}
@@ -35,15 +43,33 @@ export default {
   },
   computed: {
     category () {
-      const categories = Object.entries(this.post.data.filter_category[0])
-      return categories.filter(cat => cat[1] === true).pop()[0]
+      const obj = this.post.data.filter_category[0]
+      const keys = Object.keys(obj)
+      var filteredCats = keys.filter(function(key) {
+        return obj[key]
+      });
+      if (filteredCats.length <= 1) {
+        return filteredCats.pop()
+      }
+      return `${filteredCats[0]} / ${filteredCats[1]}`
+    },
+    techLogos () {
+      const obj = this.post.data.filter_tech[0]
+      const keys = Object.keys(obj)
+      const filteredTech = keys.filter(function(key) {
+        return obj[key]
+      });
+      const logoPaths = filteredTech.map(tech => {
+        return require(`@/assets/icons/logo-${tech}.svg`)
+      })
+      return logoPaths
     }
   },
   methods: {
     ...mapActions([ 'selectBlog' ]),
-    getContent () {
+    // getContent () {
     
-    },
+    // },
     async viewBlog() {
       const blog = await this.$prismic.client.getByUID('blog_post', this.post.uid, { fetchLinks: 'author.name' });
       if (blog && blog.data) {
@@ -57,6 +83,7 @@ export default {
 
 <style scoped lang="scss">
   .card {
+    position: relative;
     cursor: pointer;
     width: 100%;
     background-color: var(--offwhite);
@@ -86,6 +113,22 @@ export default {
         border-top-right-radius: 10px;
       }
     }
+    &__logo-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      background: var(--c-offwhite);
+      padding: var(--spacer-sm);
+      border-bottom-left-radius: 10px;
+      border-top-right-radius: 10px;
+      &__logo {
+        height: 45px;
+        &:not(:last-of-type) {
+          margin-right: var(--spacer-xs);
+        }
+      }
+    }
     &__title {
       text-align: start;
       color: var(--c-primary);
@@ -93,6 +136,9 @@ export default {
       font-size: var(--font-xl);
       font-weight: bold;
       line-height: 1.3;
+      @media (max-width: 767px) {
+        font-size: 22px;
+      }
     }
     &__category {
       text-align: start;
@@ -102,6 +148,9 @@ export default {
       font-size: var(--font-m);
       text-transform: uppercase;
       letter-spacing: 0.1em;
+      @media (max-width: 767px) {
+        font-size: var(--font-sm);
+      }
     }
     &__description {
       text-align: start;
@@ -109,6 +158,9 @@ export default {
       font-family: var(--font-secondary);
       font-size: var(--font-sm);
       margin-bottom: var(--spacer-base);
+      @media (max-width: 767px) {
+        font-size: var(--font-tiny);
+      }
     }
   }
 </style>
