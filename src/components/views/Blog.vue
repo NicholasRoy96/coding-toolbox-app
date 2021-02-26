@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="blog__container flex">
-        <BlogFilters class="mx-auto z-50 -mt-24"/>
+        <BlogFilters class="mx-auto z-50 -mt-24 sticky top-8"/>
         <div class="blog__grid">
           <div 
             v-for="(post, i) in blog.filteredPosts"
