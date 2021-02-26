@@ -33,13 +33,11 @@
         <div class="blog__banner__content">
           <h1 class="pb-2">Blog</h1>
           <img class="pb-8 w-1/4 mx-auto" src="@/assets/icons/line_orange.svg" />
-          <h2>Check out our awesome blogs below</h2>
+          <p>{{ description }}</p>
         </div>
       </div>
       <div class="blog__container flex">
-
         <BlogFilters class="mx-auto z-50 -mt-24"/>
-
         <div class="blog__grid">
           <div 
             v-for="(post, i) in blog.filteredPosts"
@@ -72,7 +70,7 @@ export default {
   computed: {
     ...mapState([ 'blog' ]),
     description () {
-      return 'Welcome to The Coding Toolbox. Read articles on Web Development tips and tricks, career advice and useful tools which you can use to make your life easier'
+      return 'Lorem ipsum dolor sit amet elit, sed do sed eiusmod tempor incididunt ut labore et.'
     }
   }
 }
@@ -114,16 +112,18 @@ export default {
       top: 40%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: white;
-      text-transform: uppercase;
-      letter-spacing: 3px;
+      color: var(--c-offwhite);
+      max-width: 500px;
       h1 {
         font-size: var(--font-fucking-massive);
         font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 3px;
       }
-      h2 {
-        font-size: var(--font-xl);
-        font-weight: 600;
+      p {
+        font-size: var(--font-base);
+        font-weight: 400;
+        line-height: 1.3;
       }
     }
   }
