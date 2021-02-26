@@ -6,7 +6,7 @@
       <div class="blog__headings lg:hidden pt-8">
         <h1 class="pb-2">Blog</h1>
         <h2 class="pb-2">Check out our awesome blogs below</h2>
-        <img class="mx-auto" src="@/assets/icons/line.svg" width="10%" />
+        <img class="mx-auto" src="@/assets/icons/line-icon.svg" width="10%" />
       </div>
       <div class="pb-4 sm:pb-16">
         <p class="blog__description">
@@ -32,7 +32,7 @@
       <div class="blog__banner flex">
         <div class="blog__banner__content">
           <h1 class="pb-2">Blog</h1>
-          <img class="pb-8 w-1/4 mx-auto" src="@/assets/icons/line_orange.svg" />
+          <img class="pb-8 w-1/4 mx-auto" src="@/assets/icons/line-icon-orange.svg" />
           <p>{{ description }}</p>
         </div>
       </div>
