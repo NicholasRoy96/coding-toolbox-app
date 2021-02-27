@@ -1,7 +1,6 @@
 <template>
   <section class="blog-post min-h-screen">
-    <div class="blog-post__banner flex">
-    </div>
+    <div class="blog-post__banner flex" :style="bannerImage" />
     <div class="blog-post__content">
       <div class="blog-post__heading">
         <h1 class="blog-post__heading__title primary--text">{{ title }}</h1>
@@ -73,7 +72,9 @@ export default {
       if (!this.post || !this.post.banner_image) {
         return {}
       }
-      return `background-image:linear-gradient(178deg, transparent 84.8%, white 85%), url(${this.post.banner_image});`
+      return {
+        '--img-url': `url('${this.post.banner_image.url}')`
+      };
     },
     // image() {
     //   if (!this.post || !this.post.blog_image) {
@@ -112,7 +113,7 @@ export default {
 .blog-post {
   &__banner {
     width: 100%;
-    background-image: linear-gradient(178deg, transparent 84.8%, white 85%), url("../../../assets/reviews.jpg");
+    background-image: linear-gradient(178deg, transparent 84.8%, white 85%), var(--img-url);
     padding-bottom: 37%;
     background-position: 50% 50%;
     position: relative;
