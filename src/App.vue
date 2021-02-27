@@ -1,21 +1,34 @@
 <template>
   <div id="app">
-    <Header />
-    <router-view />
-    <Footer />
+    <PageLoader v-if="loaders.pageLoaderActive" />
+    <template v-else>
+      <Header />
+      <router-view />
+      <Footer />
+    </template>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import Header from '@/components/shared/Header.vue'
 import Footer from '@/components/shared/Footer.vue'
+import PageLoader from '@/components/shared/PageLoader.vue'
 
 export default {
   name: 'Home',
+  data () {
+    return {
+      loading: true
+    }
+  },
   components: {
     Header,
-    Footer
+    Footer,
+    PageLoader
+  },
+  computed: {
+    ...mapState([ 'loaders' ])
   },
   methods: {
     ...mapActions([ 'getPosts' ])
