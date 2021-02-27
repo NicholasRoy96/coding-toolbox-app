@@ -1,14 +1,20 @@
 <template>
-  <section class="blog-post">
-    <div class="blog-post__content">
-      <div class="blog-post__heading">
-        <h1 class="blog-post__heading__title primary--text">{{ title }}</h1>
-        <router-link class="blog-post__heading__subtitle" :to="{ name: 'Author', params: { name: authorSlug } }">By {{ author }} | {{ date | formatDate }}</router-link>
-        <h3 class="blog-post__heading__subtitle">{{ category }}</h3>
+  <div class="min-h-screen">
+    <!-- ADD CUSTOM LOADER HERE - OR IF REUSING EVERYWHERE MOVE TO APP.VUE AND TOGGLE IN STATE -->
+    <div v-if="loading"></div>
+    <section v-else class="blog-post">
+      <div class="blog-post__banner flex">
       </div>
-      <prismic-rich-text :field="content" :htmlSerializer="HTMLSerializer" class="blog-post__text" />
-    </div>
-  </section>
+      <div class="blog-post__content">
+        <div class="blog-post__heading">
+          <h1 class="blog-post__heading__title primary--text">{{ title }}</h1>
+          <router-link class="blog-post__heading__subtitle" :to="{ name: 'Author', params: { name: authorSlug } }">By {{ author }} | {{ date | formatDate }}</router-link>
+          <h3 class="blog-post__heading__subtitle">{{ category }}</h3>
+        </div>
+        <prismic-rich-text :field="content" :htmlSerializer="HTMLSerializer" class="blog-post__text" />
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -31,7 +37,8 @@ export default {
   name: 'Post',
   data () {
     return {
-      HTMLSerializer
+      HTMLSerializer,
+      loading: false
     };
   },
   computed: {
@@ -86,23 +93,41 @@ export default {
   methods: {
     ...mapActions([ 'selectBlog' ])
   },
-  beforeRouteEnter (to, from, next) {
-    next(async(vm) => {
-      const blogID = to.params ? to.params.id : null
-      const { post } = vm;
-      if (blogID && blogID !== post.uid) {
-        const blog = await vm.$prismic.client.getByUID('blog_post', blogID, { fetchLinks: 'author.name' })
-        vm.selectBlog({ uid: blogID, ...blog.data })
-      }
-      window.scrollTo(0, 0);
-      next();
-    })
+  // beforeRouteEnter (to, from, next) {
+  //   next(async(vm) => {
+  //     const blogID = to.params ? to.params.id : null
+  //     const { post } = vm;
+  //     if ( blogID && (!post || blogID !== post.uid)) {
+  //       const blog = await vm.$prismic.client.getByUID('blog_post', blogID, { fetchLinks: 'author.name' })
+  //       vm.selectBlog({ uid: blogID, ...blog.data })
+  //     }
+  //   })
+  // },
+  async created () {
+    this.loading = true
+    const blogID = this.$route.params.id ? this.$route.params.id : null
+    const { post } = this;
+    if ( blogID && (!post || blogID !== post.uid)) {
+      const blog = await this.$prismic.client.getByUID('blog_post', blogID, { fetchLinks: 'author.name' })
+      this.selectBlog({ uid: blogID, ...blog.data })
+    }
+    this.loading = false
   }
 }
 </script>
 
 <style scoped lang="scss">
 .blog-post {
+  &__banner {
+    width: 100%;
+    background-image: linear-gradient(178deg, transparent 84.8%, white 85%), url("../../../assets/reviews.jpg");
+    padding-bottom: 37%;
+    background-position: 50% 50%;
+    position: relative;
+    @media (min-width: 1200px) {
+      padding-bottom: 30%;
+    }
+  }
   &__content {
     margin: 0 auto;
     max-width: 760px;

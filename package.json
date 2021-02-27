@@ -16,6 +16,7 @@
     "emailjs-com": "^2.6.4",
     "localstorage-ttl": "^1.0.2",
     "moment": "^2.29.1",
+    "nprogress": "^0.2.0",
     "postcss": "^7.0.35",
     "prismic-dom": "^2.2.4",
     "prismic-javascript": "^3.0.2",
