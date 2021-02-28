@@ -1,11 +1,22 @@
 <template>
   <section class="blog-post min-h-screen">
-    <div class="blog-post__banner flex" :style="bannerImage" />
-    <div class="blog-post__content">
+    <div v-if="bannerImage" class="blog-post__banner flex" :style="bannerImage" />
+    <div class="blog-post__container">
       <div class="blog-post__heading">
         <h1 class="blog-post__heading__title primary--text">{{ title }}</h1>
-        <router-link class="blog-post__heading__subtitle" :to="{ name: 'Author', params: { name: authorSlug } }">By {{ author }} | {{ date | formatDate }}</router-link>
-        <h3 class="blog-post__heading__subtitle">{{ category }}</h3>
+        <div class="flex justify-center items-center">
+          <h4 class="blog-post__heading__date">{{ date | formatDate }}</h4>
+          <img class="mx-6" width="40" src="@/assets/avatars/boy-1.svg" />
+          <h4 class="blog-post__heading__author" >
+            By
+            <router-link
+              class="blog-post__heading__author__name"
+              :to="{ name: 'Author', params: { name: authorSlug } }"
+            >
+              {{ author }}
+            </router-link>
+          </h4>
+        </div>
       </div>
       <prismic-rich-text :field="content" :htmlSerializer="HTMLSerializer" class="blog-post__text" />
     </div>
@@ -37,7 +48,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([ 'post' ]),
+    ...mapGetters([ 'post' ]),  
     title() {
       if (!this.post || !this.post.blog_title || !this.post.blog_title.length) {
         return ''
@@ -69,11 +80,13 @@ export default {
       return this.post.blog_created_date
     },
     bannerImage() {
-      if (!this.post || !this.post.banner_image) {
-        return {}
+      if (!this.post) return ''
+      const bannerImage = this.post.banner_image
+      if (!bannerImage || !Object.keys(bannerImage).length) {
+        return ''
       }
       return {
-        '--img-url': `url('${this.post.banner_image.url}')`
+        '--img-url': `url('${bannerImage.url}')`
       };
     },
     // image() {
@@ -121,28 +134,65 @@ export default {
       padding-bottom: 30%;
     }
   }
-  &__content {
+  &__container {
     margin: 0 auto;
-    max-width: 760px;
+    max-width: 910px;
     padding: var(--spacer-lg);
     color: #292929;
     text-align: left;
     font-weight: 400
   }
   &__heading {
-    padding-bottom: var(--spacer-xl);
+    position: relative;
+    width: 100%;
+    padding: var(--spacer-lg) 0;
+    margin: -180px 0 var(--spacer-xl);
     letter-spacing: -0.5px;
+    text-align: center;
+    background: var(--c-offwhite);
+    box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     &__title {
-      font-weight: 600;
-      padding-bottom: var(--spacer-sm);
+      color: var(--c-primary);
+      font-weight: 700;
+      padding-bottom: var(--spacer-base);
+      font-family: var(--font-header);
       font-size: var(--font-massive);
-      line-height: 60px;
+      line-height: 1.5;
+      max-width: 80%;
+      margin: 0 auto;
     }
-    &__subtitle {
-      font-weight: 500;
-      font-size: var(--font-lg);
-      color: #757575; 
-      line-height: 28px;
+    &__date {
+      font-family: var(--font-family-primary);
+      font-weight: 700;
+      color: var(--c-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: var(--font-sm);
+    }
+    &__author {
+      font-weight: 400;
+      font-family: var(--font-primary);
+      font-size: var(--font-m);
+      color: var(--c-primary);
+      &__name {
+        font-weight: 700;
+        color: var(--c-orange);
+        &:hover {
+          color: transparent;
+          -webkit-text-stroke: 1px var(--c-orange);
+        }
+        @supports not(-webkit-text-stroke: 2px red) {
+          a:hover {
+            text-shadow:
+              2px 2px 0 var(--c-orange),
+              -1px -1px 0 var(--c-orange),
+              1px -1px 0 var(--c-orange),
+              -1px 1px 0 var(--c-orange),
+              1px 1px 0 var(--c-orange);
+          }
+        }
+      }
     }
   }
 }
@@ -169,6 +219,9 @@ export default {
     h4 {
       font-size: var(--font-lg);
       margin-bottom: var(--spacer-xs);
+    }
+    p {
+      color: var(--c-darkgrey);
     }
     .spacer {
       padding-bottom: var(--spacer-xl);
