@@ -21,10 +21,7 @@ export default {
     ...mapActions([ 'getPosts' ])
   },
   async created() {
-    const { blog } = this;
-    if (!blog || !blog.posts || !blog.posts.length) {
-      await this.getPosts();
-    }
+    await this.getPosts();
   }
 }
 

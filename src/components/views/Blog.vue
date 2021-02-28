@@ -14,7 +14,7 @@
         </p>
         <div class="blog__grid">
           <div
-            v-for="(post, i) in blog.filteredPosts"
+            v-for="(post, i) in blog.posts"
             :key="i" 
             class="blog__grid__inner"
           >
@@ -40,7 +40,7 @@
         <BlogFilters class="mx-auto z-50 -mt-24 sticky top-8"/>
         <div class="blog__grid">
           <div 
-            v-for="(post, i) in blog.filteredPosts"
+            v-for="(post, i) in blog.posts"
             :key="i" 
             class="blog__grid__inner"
           >
@@ -48,6 +48,15 @@
               :post="post"
               class="blog__grid__card"
             />
+          </div>
+          <div>
+            Current Page: {{ blog.page }}
+          </div>
+          <div>
+            Pages
+            <button v-for="(page, index) in blog.totalPages" :key="page" @click="setPage(page)">
+              {{ index + 1 }}
+            </button>
           </div>
         </div>
       </div>
@@ -59,7 +68,7 @@
 <script>
 import BlogCard from '@/components/blog/Card.vue'
 import BlogFilters from '@/components/blog/Filters.vue'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Blog',
@@ -72,6 +81,9 @@ export default {
     description () {
       return 'Lorem ipsum dolor sit amet elit, sed do sed eiusmod tempor incididunt ut labore et.'
     }
+  },
+  methods: {
+    ...mapActions([ 'setPage' ])
   }
 }
 </script>

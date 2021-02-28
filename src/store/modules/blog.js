@@ -1,8 +1,10 @@
 const state = {
   posts: [],
-  filteredPosts: [],
-  allCategories: [],
-  allTech: [],
+  page: 1,
+  pageSize: 6,
+  totalPages: null,
+  categoryFilters: [],
+  techFilters: [],
   selectedCategories: [],
   selectedTech: [],
   selectedBlog: null
@@ -13,66 +15,52 @@ const getters = {
 }
 
 const actions = {
-  async getPosts({ commit, dispatch, state }) {
+  async getPosts({ commit, state }) {
     try {
+      // Base query
+      const query = [this._vm.$prismic.Predicates.at('document.type', 'blog_post')]
+
+      // Add category filters - currently && not ||
+      if (state.selectedCategories.length) {
+        state.selectedCategories.forEach(filter => {
+          query.push(this._vm.$prismic.Predicates.at(`my.blog_post.filter_category.${filter}`, true))
+        })
+      }
+
+      // Add tech filters - currently && not ||
+      if (state.selectedTech.length) {
+        state.selectedTech.forEach(filter => {
+          query.push(this._vm.$prismic.Predicates.at(`my.blog_post.filter_tech.${filter}`, true))
+        })
+      }
+
       const response = await this._vm.$prismic.client.query(
-        this._vm.$prismic.Predicates.at('document.type', 'blog_post')
+        query,
+        { pageSize : state.pageSize, page: state.page }
       )
+
+      // Set posts
       commit( 'setPosts', response.results )
-      const allCategories = [ ...new Set([].concat(...response.results.map(result => Object.keys(result.data.filter_category[0])) )) ]
-      commit( 'setCategories', allCategories)
-      const allTech = [ ...new Set([].concat(...response.results.map(result => Object.keys(result.data.filter_tech[0])) )) ]
-      commit( 'setTech', allTech)
-      dispatch( 'filterPosts', state.posts )
+
+      // Set total pages based on results returned
+      commit( 'setTotalPages', response.total_pages )
+
+      // Store category filters if there are more than in state
+      const categoryFilters = [ ...new Set([].concat(...response.results.map(result => Object.keys(result.data.filter_category[0])) )) ]
+      if (categoryFilters.length > state.categoryFilters) {
+        commit( 'setCategories', categoryFilters )
+      }
+
+      // Store tech filters if there are more than in state
+      const techFilters = [ ...new Set([].concat(...response.results.map(result => Object.keys(result.data.filter_tech[0])) )) ]
+      if (techFilters.length > state.techFilters) {
+        commit( 'setTech', techFilters )
+      }
     } catch (e) {
       // suppress error
     }
   },
-  filterPosts({ state, commit }) {
-    let posts = state.posts
-    // Filter by category
-    let filteredCategoryPosts = posts
-    if (state.selectedCategories.length) {
-      filteredCategoryPosts = posts.filter(post => {
-        const filterCategory = post.data.filter_category[0]
-        if (!filterCategory || !Object.keys(filterCategory).length) return
-        const activeCategories = Object.keys(filterCategory).filter(key => filterCategory[key])
-        return state.selectedCategories.some(tech => activeCategories.includes(tech))
-      })
-    }
-    // Filter by tech
-    let filteredTechPosts = posts
-    if (state.selectedTech.length) {
-      filteredTechPosts = posts.filter(post => {
-        const filterTech = post.data.filter_tech[0]
-        if (!filterTech || !Object.keys(filterTech).length) return
-        const activeTech = Object.keys(filterTech).filter(key => filterTech[key])
-        return state.selectedTech.some(tech => activeTech.includes(tech))
-      })
-    }
-
-    // No filters selected
-    if (!state.selectedCategories.length && !state.selectedTech.length) {
-      return commit( 'setFilteredPosts', posts )
-    }
-
-    // Only category filters selected
-    if (state.selectedCategories.length && !state.selectedTech.length) {
-      return commit( 'setFilteredPosts', filteredCategoryPosts )
-    }
-
-    // Only tech filters selected
-    if (!state.selectedCategories.length && state.selectedTech.length) {
-      return commit( 'setFilteredPosts', filteredTechPosts )
-    }
-
-    // Both filters selected
-    if (state.selectedCategories.length && state.selectedTech.length) {
-      const filteredPosts = [ ...new Set([...filteredCategoryPosts,...filteredTechPosts]) ]
-      return commit( 'setFilteredPosts', filteredPosts )
-    }
-  },
-  selectCategory({ commit }, filterCategory) {
+  selectCategory({ state, commit }, filterCategory) {
     let newCategories = state.selectedCategories
     if (state.selectedCategories.includes(filterCategory)) {
       newCategories = state.selectedCategories.filter(category => {
@@ -98,6 +86,10 @@ const actions = {
   },
   selectBlog({ commit }, blog) {
     commit( 'setBlog', blog )
+  },
+  setPage({ dispatch, commit }, page) {
+    commit( 'setPage', page)
+    dispatch('getPosts')
   }
 }
 
@@ -105,14 +97,17 @@ const mutations = {
   setPosts( state, posts ) {
     state.posts = posts
   },
-  setFilteredPosts( state, posts) {
-    state.filteredPosts = posts
+  setTotalPages( state, totalPage ) {
+    state.totalPages = totalPage
+  },
+  setPage( state, page ) {
+    state.page = page
   },
   setCategories( state, categories ) {
-    state.allCategories = categories
+    state.categoryFilters = categories
   },
   setTech( state, tech ) {
-    state.allTech = tech
+    state.techFilters = tech
   },
   setFilterCategory( state, categories ) {
     state.selectedCategories = categories

@@ -11,7 +11,7 @@
       <h3>Category</h3>
       <div
         class="item cursor-pointer flex"
-        v-for="category in blog.allCategories"
+        v-for="category in blog.categoryFilters"
         :key="category"
         @click="toggleCategory(category)"
       >
@@ -31,7 +31,7 @@
       <h3 class="pt-6">Tech Stack</h3>  
       <div
         class="item cursor-pointer flex"
-        v-for="tech in blog.allTech"
+        v-for="tech in blog.techFilters"
         :key="tech"
         @click="toggleTech(tech)"
       >
@@ -60,7 +60,7 @@ export default {
     ...mapState([ 'blog' ])
   },
   methods: {
-    ...mapActions([ 'selectCategory', 'selectTech', 'filterPosts' ]),
+    ...mapActions([ 'selectCategory', 'selectTech', 'getPosts' ]),
     isActiveCategory (filterCategory) {
       return this.blog.selectedCategories.includes(filterCategory)
     },
@@ -69,11 +69,11 @@ export default {
     },
     toggleCategory (filterCategory) {
       this.selectCategory(filterCategory)
-      this.filterPosts()
+      this.getPosts()
     },
     toggleTech (filterTech) {
       this.selectTech(filterTech)
-      this.filterPosts()
+      this.getPosts()
     }
   }
 }
