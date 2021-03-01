@@ -21,37 +21,16 @@
       </div>
       <prismic-rich-text :field="content" :htmlSerializer="HTMLSerializer" class="blog-post__text" />
     </div>
-    <div class="blog-post__author-card flex flex-row justify-center items-center">
-      <div class="blog-post__author-card__image flex justify-center items-center">
-        <img class="mx-6" width="50" src="@/assets/avatars/boy-1.svg" />
-      </div>
-      <div class="blog-post__author-card__content">
-        <p class="blog-post__author-card__content__description mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, a obcaecati mollitia explicabo velit quasi voluptatum delectus facilis dolorem perferendis officiis nam optio quia sequi. Odio corporis quibusdam excepturi sunt!</p>
-        <div class="flex justify-between items-center">
-          <div class="blog-post__author-card__content__links flex">
-            <img class="icon" src="@/assets/icons/github.svg" width="25">
-            <img class="icon" src="@/assets/icons/youtube.svg" width="25">
-          </div>
-          <button
-            @click="$router.push({ name: 'Author', params: { name: authorSlug } })"
-            class="blog-post__author-card__content__button"
-          >
-            More By This Author
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="blog-post__back-bar">
-      <button @click="$router.push('/')" class="blog-post__back-bar__button">
-        Back to Blogs
-      </button>
-    </div>
+    <AuthorCard class="mx-auto mb-14" />
+    <BackBar buttonText="Back to Blogs" />
   </section>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import prismicDOM from 'prismic-dom'
+import AuthorCard from '@/components/post/AuthorCard.vue'
+import BackBar from '@/components/shared/BackBar.vue'
 
 const Elements = prismicDOM.RichText.Elements
 
@@ -67,6 +46,10 @@ const HTMLSerializer = function(type, element, content, children) {
 
 export default {
   name: 'Post',
+  components: {
+    AuthorCard,
+    BackBar
+  },
   data () {
     return {
       HTMLSerializer,
@@ -180,7 +163,7 @@ export default {
     position: relative;
     width: 100%;
     padding: var(--spacer-lg) 0;
-    margin: -180px 0 var(--spacer-xl);
+    margin: -190px 0 var(--spacer-xl);
     letter-spacing: -0.5px;
     text-align: center;
     background: var(--c-offwhite);
@@ -226,72 +209,6 @@ export default {
               1px 1px 0 var(--c-orange);
           }
         }
-      }
-    }
-  }
-  &__author-card {
-    display: flex;
-    justify-content: flex-end;
-    position: relative;
-    max-width: 758px;
-    margin: 0 auto var(--spacer-lg);
-    border-radius: 10px;
-    background: var(--c-offwhite);
-    box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.1);
-    &__image {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 20%;
-      background: var(--c-lightred);
-      border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
-    }
-    &__content {
-      width: 80%;
-      text-align: start;
-      padding: var(--spacer-lg);
-      &__links {
-        .icon:not(:last-of-type) {
-          margin-right: var(--spacer-xs);
-        }
-      }
-      &__description {
-        font-family: var(--font-secondary);
-        font-size: var(--font-sm);
-        color: var(--c-lightgrey);
-      }
-      &__button {
-        text-transform: uppercase;
-        color: rgba(0, 0, 0, 0.3);
-        font-family: var(--font-primary);
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        font-size: var(--font-tiny);
-      }
-    }
-  }
-  &__back-bar {
-    width: 100%;
-    background: rgba(255, 153, 1, 0.08);
-    padding: var(--spacer-base) 0;
-    &__button {
-      text-transform: uppercase;
-      color: var(--c-white);
-      font-family: var(--font-primary);
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      padding: var(--spacer-sm) 20px;
-      background: linear-gradient(97.57deg, var(--c-orange) 50%, #F6836A 107.15%);
-      border-radius: 8px;
-      -o-transition: all 200ms ease-in-out;
-      -webkit-transition: all 200ms ease-in-out;
-      -moz-transition: all 200ms ease-in-out;
-      -ms-transition: all 200ms ease-in-out;
-      transition: all 200ms ease-in-out;
-      &:hover {
-        filter: brightness(0.92);
       }
     }
   }
