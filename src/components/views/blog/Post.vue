@@ -23,16 +23,19 @@
     </div>
     <div class="blog-post__author-card flex flex-row justify-center items-center">
       <div class="blog-post__author-card__image flex justify-center items-center">
-        <img class="mx-6" width="40" src="@/assets/avatars/boy-1.svg" />
+        <img class="mx-6" width="50" src="@/assets/avatars/boy-1.svg" />
       </div>
       <div class="blog-post__author-card__content">
         <p class="blog-post__author-card__content__description mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, a obcaecati mollitia explicabo velit quasi voluptatum delectus facilis dolorem perferendis officiis nam optio quia sequi. Odio corporis quibusdam excepturi sunt!</p>
         <div class="flex justify-between items-center">
           <div class="blog-post__author-card__content__links flex">
-            <img src="@/assets/icons/github.svg" width="25">
-            <img src="@/assets/icons/youtube.svg" width="25">
+            <img class="icon" src="@/assets/icons/github.svg" width="25">
+            <img class="icon" src="@/assets/icons/youtube.svg" width="25">
           </div>
-          <button class="blog-post__author-card__content__button">
+          <button
+            @click="$router.push({ name: 'Author', params: { name: authorSlug } })"
+            class="blog-post__author-card__content__button"
+          >
             More By This Author
           </button>
         </div>
@@ -231,7 +234,7 @@ export default {
     justify-content: flex-end;
     position: relative;
     max-width: 758px;
-    margin: 0 auto;
+    margin: 0 auto var(--spacer-lg);
     border-radius: 10px;
     background: var(--c-offwhite);
     box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.1);
@@ -249,10 +252,23 @@ export default {
       width: 80%;
       text-align: start;
       padding: var(--spacer-lg);
-      p {
+      &__links {
+        .icon:not(:last-of-type) {
+          margin-right: var(--spacer-xs);
+        }
+      }
+      &__description {
         font-family: var(--font-secondary);
         font-size: var(--font-sm);
         color: var(--c-lightgrey);
+      }
+      &__button {
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.3);
+        font-family: var(--font-primary);
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        font-size: var(--font-tiny);
       }
     }
   }
