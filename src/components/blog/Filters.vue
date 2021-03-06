@@ -47,6 +47,7 @@
           {{ tech }}
         </span>
       </div>
+      <button class="item__name mt-4" @click="clearFilters">Clear all</button>
     </div>
   </div>
 </template>
@@ -60,7 +61,7 @@ export default {
     ...mapState([ 'blog' ])
   },
   methods: {
-    ...mapActions([ 'selectCategory', 'selectTech', 'getPosts' ]),
+    ...mapActions([ 'selectCategory', 'selectTech', 'getPosts', 'clearFilters' ]),
     isActiveCategory (filterCategory) {
       return this.blog.selectedCategories.includes(filterCategory)
     },
