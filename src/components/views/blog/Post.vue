@@ -23,6 +23,8 @@
     </div>
     <AuthorCard class="mx-auto mb-14" />
     <BackBar buttonText="Back to Blogs" />
+    <!-- Card recommendation blog -->
+    <!-- Need to add logic for this in helpers/index.js -->
   </section>
 </template>
 
