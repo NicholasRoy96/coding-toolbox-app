@@ -22,7 +22,7 @@
           name="message"
           id="contact-modal-message"
           label="contact-modal-message"
-          placeholder="Type here and leave us a message, then click send to get in touch!"
+          :placeholder="placeholderText"
           cols="100"
           rows="8"
         />
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import emailjs from 'emailjs-com'
+// import emailjs from 'emailjs-com'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -45,7 +45,7 @@ export default {
       message: '',
       error: '',
       sending: false,
-      sent: false
+      placeholderText: 'Type here and leave us a message, then click send to get in touch!'
     }
   },
   computed: {
@@ -62,12 +62,12 @@ export default {
     },
     async send() {
       try {
-        // e.preventDefault()
+        if (!this.message) return this.placeholderText = 'Please enter a message here before you send!'
         this.sending = true
-        await emailjs.send(process.env.VUE_APP_EMAIL_SERVICE, process.env.VUE_APP_EMAIL_TEMPLATE, { name: 'Nick', email: 'Nick@Nick.com', message: this.message }, process.env.VUE_APP_EMAIL_USER)
-        this.sent = true
+        // await emailjs.send(process.env.VUE_APP_EMAIL_SERVICE, process.env.VUE_APP_EMAIL_TEMPLATE, { name: 'Nick', email: 'Nick@Nick.com', message: this.message }, process.env.VUE_APP_EMAIL_USER)
         this.sending = false
         this.message = ''
+        this.placeholderText = 'Type here and leave us a message, then click send to get in touch!'
       } catch (error) {
         this.sending = false
         this.error = error

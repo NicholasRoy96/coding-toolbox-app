@@ -1,5 +1,5 @@
 <template>
-  <div class="author-card flex flex-row justify-center items-center">
+  <div class="author-card flex flex-row items-center">
     <div class="author-card__image flex justify-center items-center">
       <img class="mx-6" width="80" src="@/assets/avatars/boy-1.svg" />
     </div>
@@ -27,7 +27,12 @@
 
 <script>
 export default {
-  name: 'AuthorCard'
+  name: 'AuthorCard',
+  props: {
+    authorSlug: {
+      required: true
+    }
+  }
 }
 </script>
 

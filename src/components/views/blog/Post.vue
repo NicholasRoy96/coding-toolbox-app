@@ -21,7 +21,7 @@
       </div>
       <prismic-rich-text :field="content" :htmlSerializer="HTMLSerializer" class="blog-post__text" />
     </div>
-    <AuthorCard class="mx-auto mb-14" />
+    <AuthorCard class="mx-auto mb-14" :authorSlug="authorSlug" />
     <BackBar buttonText="Back to Blogs" />
     <!-- Card recommendation blog -->
     <!-- Need to add logic for this in helpers/index.js -->
